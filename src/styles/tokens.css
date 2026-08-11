@@ -1,0 +1,29 @@
+:root {
+  /* Eclipse palette — warm near-black, cream text, corona gold */
+  --color-bg: oklch(13% 0.01 60);
+  --color-bg-raised: oklch(17% 0.014 60);
+  --color-text: oklch(93% 0.018 85);
+  --color-text-dim: oklch(68% 0.02 80);
+  --color-accent: oklch(78% 0.14 75);
+  --color-accent-hot: oklch(70% 0.19 45);
+  --color-line: oklch(28% 0.02 70);
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+
+  --text-base: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --text-lead: clamp(1.35rem, 1.1rem + 1.2vw, 2rem);
+  --text-h2: clamp(2.2rem, 1.5rem + 3vw, 4rem);
+  --text-hero: clamp(3rem, 1.4rem + 7.5vw, 7.5rem);
+  --text-label: 0.78rem;
+
+  --space-section: clamp(5rem, 3.5rem + 8vw, 11rem);
+  --space-gutter: clamp(1.25rem, 0.75rem + 3vw, 4rem);
+  --content-max: 72rem;
+
+  --duration-fast: 180ms;
+  --duration-normal: 400ms;
+  --duration-slow: 900ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Projects from "../components/Projects.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<Layout>
+  <Hero />
+  <main>
+    <section class="wrap intro" aria-label="About">
+      <p class="reveal">
+        I've spent <em>14 years</em> on GitHub building products end to end —
+        from orbital math to the APK on someone's phone. My obsession: software
+        that stays fast, private and useful even with zero bars of signal.
+      </p>
+    </section>
+    <Projects />
+    <Skills />
+  </main>
+  <Contact />
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-section) 0;
+  }
+
+  .intro p {
+    max-width: 46rem;
+    font-family: var(--font-display);
+    font-size: var(--text-lead);
+    line-height: 1.45;
+  }
+
+  .intro em {
+    color: var(--color-accent);
+  }
+</style>

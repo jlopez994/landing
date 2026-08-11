@@ -1,0 +1,67 @@
+---
+const email = "contact.jldevelops@gmail.com";
+---
+
+<footer id="contact" aria-labelledby="contact-heading">
+  <div class="wrap">
+    <p class="label reveal">Available for interesting problems</p>
+    <h2 id="contact-heading" class="reveal">
+      <a href={`mailto:${email}`}>{email}</a>
+    </h2>
+    <div class="bottom reveal">
+      <a class="label" href="https://github.com/jlopez994" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="label" href="https://www.linkedin.com/in/jlopezdev/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span class="label">Spain · {new Date().getFullYear()}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding-block: var(--space-section) 3rem;
+  }
+
+  h2 {
+    margin-top: 1.5rem;
+    font-size: clamp(1.5rem, 0.5rem + 4.5vw, 4.5rem);
+    overflow-wrap: anywhere;
+  }
+
+  h2 a {
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-accent), var(--color-accent));
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: left 105%;
+    transition:
+      background-size var(--duration-normal) var(--ease-out-expo),
+      color var(--duration-fast) ease;
+  }
+
+  h2 a:hover {
+    color: var(--color-accent);
+    background-size: 100% 2px;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .bottom a {
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .bottom a:hover {
+    color: var(--color-accent);
+  }
+
+  .bottom span {
+    margin-left: auto;
+  }
+</style>

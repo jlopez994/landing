@@ -1,0 +1,198 @@
+---
+const links = [
+  { label: "GitHub", href: "https://github.com/jlopez994" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/jlopezdev/" },
+  { label: "Email", href: "mailto:contact.jldevelops@gmail.com" },
+];
+---
+
+<header class="hero">
+  <nav class="wrap" aria-label="Main navigation">
+    <span class="brand label">jl—dev</span>
+    <ul>
+      <li><a class="label" href="#work">Work</a></li>
+      <li><a class="label" href="#skills">Skills</a></li>
+      <li><a class="label" href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="wrap stage">
+    <div class="eclipse" aria-hidden="true"></div>
+    <div class="copy">
+      <p class="label eyebrow">Julian López · Software Engineer · Spain</p>
+      <h1>
+        Software that works when <em>the cloud doesn't.</em>
+      </h1>
+      <p class="sub">
+        Local-first products in TypeScript, React Native and edge ML.
+        On GitHub since 2012 — shipping real apps, not demos.
+      </p>
+      <ul class="links">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                class="label link"
+                href={l.href}
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel={l.href.startsWith("http") ? "noopener" : undefined}
+              >
+                {l.label} ↗
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    padding-block: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  nav a:hover {
+    color: var(--color-accent);
+  }
+
+  .brand {
+    color: var(--color-text);
+  }
+
+  .stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-block: 4rem;
+  }
+
+  /* Eclipse disc: black moon over breathing corona glow */
+  .eclipse {
+    position: absolute;
+    right: calc(-1 * var(--space-gutter));
+    top: 50%;
+    translate: 20% -55%;
+    width: clamp(18rem, 45vw, 34rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: oklch(8% 0.008 60);
+    box-shadow:
+      0 0 60px 8px oklch(78% 0.14 75 / 0.35),
+      0 0 160px 30px oklch(70% 0.19 45 / 0.2),
+      inset 0 0 40px oklch(0% 0 0 / 0.9);
+    animation: breathe 7s ease-in-out infinite;
+  }
+
+  .eclipse::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px solid oklch(78% 0.14 75 / 0.55);
+    filter: blur(1px);
+  }
+
+  @keyframes breathe {
+    50% {
+      box-shadow:
+        0 0 80px 12px oklch(78% 0.14 75 / 0.45),
+        0 0 200px 40px oklch(70% 0.19 45 / 0.28),
+        inset 0 0 40px oklch(0% 0 0 / 0.9);
+    }
+  }
+
+  .copy {
+    position: relative;
+    z-index: 1;
+    max-width: 56rem;
+  }
+
+  .eyebrow {
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-size: var(--text-hero);
+    letter-spacing: -0.015em;
+  }
+
+  h1 em {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .sub {
+    margin-top: 2rem;
+    max-width: 34rem;
+    font-size: var(--text-lead);
+    line-height: 1.4;
+    color: var(--color-text-dim);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 3rem;
+  }
+
+  .link {
+    color: var(--color-text);
+    text-decoration: none;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--color-line);
+    transition:
+      color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease;
+  }
+
+  .link:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  @media (max-width: 48rem) {
+    .eclipse {
+      right: 50%;
+      top: 0;
+      translate: 50% -35%;
+      opacity: 0.8;
+    }
+
+    .stage {
+      align-items: flex-end;
+    }
+  }
+</style>

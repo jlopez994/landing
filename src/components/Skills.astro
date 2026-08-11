@@ -1,0 +1,80 @@
+---
+const groups = [
+  {
+    label: "Languages",
+    items: "TypeScript · JavaScript · Python · SQL",
+  },
+  {
+    label: "Web & Mobile",
+    items: "React · React Native · Expo · Next.js · Astro · PWA",
+  },
+  {
+    label: "Backend & Cloud",
+    items: "Node.js · Firebase · REST APIs · CI/CD",
+  },
+  {
+    label: "Edge ML",
+    items: "openWakeWord · ONNX · Piper TTS · training pipelines",
+  },
+  {
+    label: "Principles",
+    items: "Offline-first · privacy by design · i18n · ship it",
+  },
+];
+---
+
+<section id="skills" aria-labelledby="skills-heading">
+  <div class="wrap">
+    <h2 id="skills-heading" class="label reveal">Toolbox</h2>
+    <dl>
+      {
+        groups.map((g) => (
+          <div class="row reveal">
+            <dt class="label">{g.label}</dt>
+            <dd>{g.items}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-block: var(--space-section);
+    background: var(--color-bg-raised);
+  }
+
+  dl {
+    margin-top: 3rem;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr);
+    gap: 0.5rem var(--space-gutter);
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .row:last-child {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  dt {
+    padding-top: 0.5rem;
+  }
+
+  dd {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.4rem);
+    line-height: 1.3;
+  }
+
+  @media (max-width: 48rem) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

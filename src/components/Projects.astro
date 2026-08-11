@@ -1,0 +1,146 @@
+---
+const projects = [
+  {
+    num: "01",
+    name: "eclipsum",
+    kicker: "Android app · built for the Aug 12, 2026 total eclipse over Spain",
+    description:
+      "Solar-eclipse companion computing C1–C4 contact times, obscuration and totality duration for any coordinate — 100% on-device with astronomy-engine, no backend. Path-of-totality map, exact local alerts per contact, cloud-cover forecasts with offline cache, and a full-screen eclipse mode that tells you when glasses go on and off.",
+    tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase RC", "i18n es/en"],
+    href: "https://github.com/jlopez994/eclipsum",
+  },
+  {
+    num: "02",
+    name: "rufus",
+    kicker: "Private voice assistant · edge ML",
+    description:
+      "A voice assistant that never sends your audio anywhere. Custom “Rufus” wake word trained with openWakeWord — Spanish synthetic voices plus my own recordings — exported to ONNX and running fully local on the edge. The training pipeline is a reproducible Colab notebook anyone can run.",
+    tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio pipelines"],
+    href: "https://github.com/jlopez994/rufus-playbooks",
+  },
+];
+---
+
+<section id="work" aria-labelledby="work-heading">
+  <div class="wrap">
+    <h2 id="work-heading" class="label reveal">Selected work</h2>
+    <ul class="list">
+      {
+        projects.map((p) => (
+          <li class="project reveal">
+            <span class="num" aria-hidden="true">
+              {p.num}
+            </span>
+            <div class="body">
+              <h3>
+                <a href={p.href} target="_blank" rel="noopener">
+                  {p.name} <span class="arrow">↗</span>
+                </a>
+              </h3>
+              <p class="kicker label">{p.kicker}</p>
+              <p class="description">{p.description}</p>
+              <ul class="tags" aria-label="Technologies">
+                {p.tags.map((t) => (
+                  <li class="label">{t}</li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-block: var(--space-section);
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin-top: 3rem;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 7fr);
+    gap: 1rem var(--space-gutter);
+    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem);
+    border-top: 1px solid var(--color-line);
+    transition: border-color var(--duration-normal) ease;
+  }
+
+  .project:hover {
+    border-top-color: var(--color-accent);
+  }
+
+  /* Alternate: push even projects right for editorial rhythm */
+  .project:nth-child(even) .body {
+    margin-left: clamp(0rem, 8vw, 8rem);
+  }
+
+  .num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-h2);
+    line-height: 1;
+    color: var(--color-text-dim);
+    opacity: 0.5;
+  }
+
+  h3 {
+    font-size: var(--text-h2);
+  }
+
+  h3 a {
+    text-decoration: none;
+    transition: color var(--duration-fast) ease;
+  }
+
+  .arrow {
+    display: inline-block;
+    font-size: 0.6em;
+    vertical-align: 0.35em;
+    transition: translate var(--duration-fast) var(--ease-out-expo);
+  }
+
+  h3 a:hover {
+    color: var(--color-accent);
+  }
+
+  h3 a:hover .arrow {
+    translate: 0.15em -0.15em;
+  }
+
+  .kicker {
+    margin-top: 0.75rem;
+    color: var(--color-accent);
+  }
+
+  .description {
+    margin-top: 1.25rem;
+    max-width: 40rem;
+    color: var(--color-text-dim);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 48rem) {
+    .project {
+      grid-template-columns: 1fr;
+    }
+
+    .project:nth-child(even) .body {
+      margin-left: 0;
+    }
+  }
+</style>
