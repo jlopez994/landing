@@ -1,67 +1,133 @@
 ---
 const email = "contact.jldevelops@gmail.com";
+
+const links = [
+  { label: "github", href: "https://github.com/jlopez994" },
+  { label: "linkedin", href: "https://www.linkedin.com/in/jlopezdev/" },
+  { label: "telegram", href: "https://telegram.me/jlopez_dev" },
+];
+
+const year = new Date().getFullYear();
 ---
 
-<footer id="contact" aria-labelledby="contact-heading">
-  <div class="wrap">
-    <p class="label reveal">Available for interesting problems</p>
-    <h2 id="contact-heading" class="reveal">
-      <a href={`mailto:${email}`}>{email}</a>
-    </h2>
-    <div class="bottom reveal">
-      <a class="label" href="https://github.com/jlopez994" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="label" href="https://www.linkedin.com/in/jlopezdev/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <span class="label">Spain · {new Date().getFullYear()}</span>
+<section id="contact" class="section">
+  <div class="panel reveal">
+    <div class="panel-glow" aria-hidden="true"></div>
+    <div class="pitch">
+      <h2>¿Trabajamos juntos?</h2>
+      <p>Respondo en menos de 24 horas. Cuéntame el problema, no la solución.</p>
+    </div>
+    <div class="channels">
+      <a href={`mailto:${email}`} class="btn btn-primary mail">{email}</a>
+      <div class="social">
+        {
+          links.map((l) => (
+            <a href={l.href} target="_blank" rel="noopener">
+              {l.label}
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
-</footer>
+
+  <footer>
+    <span>© {year} Julián López Hervás</span>
+    <span>Toledo · Madrid · UTC+2</span>
+  </footer>
+</section>
 
 <style>
-  footer {
-    padding-block: var(--space-section) 3rem;
+  .section {
+    position: relative;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: clamp(3.5rem, 9vw, 7.5rem) var(--space-gutter) 0;
   }
 
-  h2 {
-    margin-top: 1.5rem;
-    font-size: clamp(1.5rem, 0.5rem + 4.5vw, 4.5rem);
+  .panel {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 3.8rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-glow {
+    position: absolute;
+    inset: auto -10% -60% 40%;
+    height: 22rem;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(124, 241, 180, 0.1),
+      transparent 65%
+    );
+  }
+
+  .pitch {
+    position: relative;
+    max-width: 28rem;
+  }
+
+  .pitch h2 {
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin-bottom: 0.9rem;
+  }
+
+  .pitch p {
+    color: var(--color-mid);
+    line-height: 1.65;
+  }
+
+  .channels {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-width: 14rem;
+  }
+
+  .mail {
+    text-align: center;
     overflow-wrap: anywhere;
   }
 
-  h2 a {
-    text-decoration: none;
-    background-image: linear-gradient(var(--color-accent), var(--color-accent));
-    background-repeat: no-repeat;
-    background-size: 0% 2px;
-    background-position: left 105%;
-    transition:
-      background-size var(--duration-normal) var(--ease-out-expo),
-      color var(--duration-fast) ease;
+  .social {
+    display: flex;
+    gap: 1.3rem;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-dim);
   }
 
-  h2 a:hover {
+  .social a {
+    transition: color var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .social a:hover {
     color: var(--color-accent);
-    background-size: 100% 2px;
   }
 
-  .bottom {
+  footer {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem 2.5rem;
-    margin-top: 5rem;
-    padding-top: 1.5rem;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding: 1.4rem 0 2.4rem;
     border-top: 1px solid var(--color-line);
-  }
-
-  .bottom a {
-    text-decoration: none;
-    transition: color var(--duration-fast) ease;
-  }
-
-  .bottom a:hover {
-    color: var(--color-accent);
-  }
-
-  .bottom span {
-    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--color-dim);
   }
 </style>

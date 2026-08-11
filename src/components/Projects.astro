@@ -2,145 +2,129 @@
 const projects = [
   {
     num: "01",
-    name: "eclipsum",
-    kicker: "Android app · built for the Aug 12, 2026 total eclipse over Spain",
-    description:
-      "Solar-eclipse companion computing C1–C4 contact times, obscuration and totality duration for any coordinate — 100% on-device with astronomy-engine, no backend. Path-of-totality map, exact local alerts per contact, cloud-cover forecasts with offline cache, and a full-screen eclipse mode that tells you when glasses go on and off.",
-    tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase RC", "i18n es/en"],
+    year: "2026",
+    metric: "sin backend",
+    title: "eclipsum — compañero de eclipses solares",
+    body: "App Android para el eclipse total del 12 de agosto de 2026 sobre España. Calcula contactos C1–C4, obscuración y duración de la totalidad para cualquier coordenada, 100 % en el dispositivo con astronomy-engine. Mapa de la banda de totalidad, alertas locales exactas por contacto, nubosidad cacheada offline y un modo eclipse a pantalla completa que avisa de cuándo ponerse y quitarse las gafas.",
+    tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
     href: "https://github.com/jlopez994/eclipsum",
   },
   {
     num: "02",
-    name: "rufus",
-    kicker: "Private voice assistant · edge ML",
-    description:
-      "A voice assistant that never sends your audio anywhere. Custom “Rufus” wake word trained with openWakeWord — Spanish synthetic voices plus my own recordings — exported to ONNX and running fully local on the edge. The training pipeline is a reproducible Colab notebook anyone can run.",
-    tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio pipelines"],
+    year: "2026",
+    metric: "wake word propia",
+    title: "rufus — asistente de voz privado",
+    body: "Asistente que nunca envía tu audio a ningún sitio. Wake word «Rufus» entrenada con openWakeWord combinando voces sintéticas en español y grabaciones reales, exportada a ONNX y ejecutándose entera en el edge. El pipeline de entrenamiento es un notebook de Colab reproducible.",
+    tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
     href: "https://github.com/jlopez994/rufus-playbooks",
   },
 ];
 ---
 
-<section id="work" aria-labelledby="work-heading">
-  <div class="wrap">
-    <h2 id="work-heading" class="label reveal">Selected work</h2>
-    <ul class="list">
-      {
-        projects.map((p) => (
-          <li class="project reveal">
-            <span class="num" aria-hidden="true">
-              {p.num}
-            </span>
-            <div class="body">
-              <h3>
-                <a href={p.href} target="_blank" rel="noopener">
-                  {p.name} <span class="arrow">↗</span>
-                </a>
-              </h3>
-              <p class="kicker label">{p.kicker}</p>
-              <p class="description">{p.description}</p>
-              <ul class="tags" aria-label="Technologies">
-                {p.tags.map((t) => (
-                  <li class="label">{t}</li>
-                ))}
-              </ul>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
+<section id="work" class="section">
+  <div class="section-head reveal">
+    <span class="idx">01</span>
+    <h2>Proyectos</h2>
+    <span class="rule"></span>
+    <span class="meta">código abierto</span>
+  </div>
+
+  <div class="cards">
+    {
+      projects.map((p, i) => (
+        <a
+          class="card reveal"
+          style={`--i:${i}`}
+          href={p.href}
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="card-meta">
+            <span>{p.num} · {p.year}</span>
+            <span class="metric">{p.metric}</span>
+          </div>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+          <div class="tags">
+            {p.tags.map((t) => (
+              <span class="chip">{t}</span>
+            ))}
+          </div>
+        </a>
+      ))
+    }
   </div>
 </section>
 
 <style>
-  section {
-    padding-block: var(--space-section);
+  .section {
+    position: relative;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--space-section) var(--space-gutter);
   }
 
-  .list {
-    list-style: none;
-    padding: 0;
-    margin-top: 3rem;
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .project {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 7fr);
-    gap: 1rem var(--space-gutter);
-    padding-block: clamp(2.5rem, 2rem + 3vw, 5rem);
-    border-top: 1px solid var(--color-line);
-    transition: border-color var(--duration-normal) ease;
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    padding: clamp(1.5rem, 3vw, 2.1rem);
+    transition:
+      border-color 600ms var(--ease-out-expo),
+      transform 600ms var(--ease-out-expo),
+      background 600ms var(--ease-out-expo);
   }
 
-  .project:hover {
-    border-top-color: var(--color-accent);
+  .card:hover {
+    border-color: var(--color-line-hover);
+    transform: translateY(-3px);
+    background: var(--color-card-hover);
   }
 
-  /* Alternate: push even projects right for editorial rhythm */
-  .project:nth-child(even) .body {
-    margin-left: clamp(0rem, 8vw, 8rem);
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--color-dim);
   }
 
-  .num {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--text-h2);
-    line-height: 1;
-    color: var(--color-text-dim);
-    opacity: 0.5;
+  .metric {
+    color: var(--color-accent);
+    border: 1px solid var(--color-line-accent);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
   }
 
   h3 {
-    font-size: var(--text-h2);
+    font-size: var(--text-card-title);
+    max-width: 34rem;
   }
 
-  h3 a {
-    text-decoration: none;
-    transition: color var(--duration-fast) ease;
-  }
-
-  .arrow {
-    display: inline-block;
-    font-size: 0.6em;
-    vertical-align: 0.35em;
-    transition: translate var(--duration-fast) var(--ease-out-expo);
-  }
-
-  h3 a:hover {
-    color: var(--color-accent);
-  }
-
-  h3 a:hover .arrow {
-    translate: 0.15em -0.15em;
-  }
-
-  .kicker {
-    margin-top: 0.75rem;
-    color: var(--color-accent);
-  }
-
-  .description {
-    margin-top: 1.25rem;
-    max-width: 40rem;
-    color: var(--color-text-dim);
+  .card p {
+    max-width: 42rem;
+    font-size: 1rem;
+    line-height: 1.68;
+    color: var(--color-mid);
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 1.5rem;
-  }
-
-  @media (max-width: 48rem) {
-    .project {
-      grid-template-columns: 1fr;
-    }
-
-    .project:nth-child(even) .body {
-      margin-left: 0;
-    }
+    gap: 0.45rem;
+    margin-top: 0.2rem;
   }
 </style>

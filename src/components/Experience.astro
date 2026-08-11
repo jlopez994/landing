@@ -1,117 +1,131 @@
 ---
-const jobs = [
+const roles = [
   {
-    years: "2024 — now",
-    role: "Senior Software Engineer",
-    org: "Ayesa",
-    detail:
-      "Frontend and backend on critical apps — Angular, Spring Boot, SOLID. Madrid.",
+    years: "2024 — hoy",
+    role: "Analista Programador Senior",
+    company: "Ayesa",
+    stack: "Frontend y backend de aplicaciones críticas con Angular y Spring Boot, siguiendo principios SOLID.",
   },
   {
     years: "2022 — 2024",
-    role: "Co-founder & Lead Developer",
-    org: "Asistencia y Gestión Deportiva",
-    detail:
-      "Sports-tech platform on cloud microservices — Next.js, NestJS, MySQL, MongoDB, Redis, Socket.IO.",
+    role: "Socio fundador y desarrollador principal",
+    company: "Asistencia y Gestión Deportiva",
+    stack: "Plataforma de gestión deportiva sobre microservicios cloud: Next.js, NestJS, MySQL, MongoDB, Redis y Socket.IO.",
   },
   {
     years: "2022 — 2024",
-    role: "Senior Software Engineer",
-    org: "Ibermática",
-    detail:
-      "Angular on an NX monorepo with NGRX and AWS, GitLab CI — in a 4-dev frontend team.",
+    role: "Analista Programador Senior",
+    company: "Ibermática",
+    stack: "Angular sobre monorepo NX con NGRX y AWS, despliegue con GitLab CI en un equipo de cuatro frontends.",
   },
   {
     years: "2020 — 2021",
-    role: "Full-Stack Developer",
-    org: "BOLTIA",
-    detail:
-      "Lead dev and technical mentor — Angular 11, Node.js, Linux deployments with PM2.",
+    role: "Desarrollador Full-Stack",
+    company: "BOLTIA",
+    stack: "Referente técnico y mentor de un perfil junior. Angular 11, Node.js y despliegues Linux con PM2.",
   },
   {
     years: "2018 — 2021",
-    role: "Freelance Full-Stack Developer",
-    org: "Blockchain & crypto",
-    detail:
-      "Lead developer on a crypto product — Angular 7→12, Node.js, Docker Swarm, GitLab CI.",
+    role: "Desarrollador Full-Stack freelance",
+    company: "Blockchain y criptomonedas",
+    stack: "Desarrollador principal de un producto cripto: Angular 7→12, Node.js, Docker Swarm y GitLab CI.",
   },
 ];
 
-const education =
-  "BSc Computer Engineering, Universidad Rey Juan Carlos · Higher Technician in Web Development";
+const education = [
+  "Ingeniería Informática · Universidad Rey Juan Carlos (2015 — 2020)",
+  "Técnico Superior en Desarrollo de Aplicaciones Web (2013 — 2015)",
+  "Inglés · nivel profesional completo",
+];
 ---
 
-<section id="experience" aria-labelledby="experience-heading">
-  <div class="wrap">
-    <h2 id="experience-heading" class="label reveal">Experience</h2>
-    <ol class="jobs">
-      {
-        jobs.map((j) => (
-          <li class="job reveal">
-            <span class="years label">{j.years}</span>
-            <div>
-              <h3>
-                {j.role} <span class="org">· {j.org}</span>
-              </h3>
-              <p>{j.detail}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="education label reveal">{education}</p>
+<section id="exp" class="section">
+  <div class="section-head reveal">
+    <span class="idx">02</span>
+    <h2>Experiencia</h2>
+    <span class="rule"></span>
+    <span class="meta">2018 — hoy</span>
   </div>
+
+  <ol class="roles">
+    {
+      roles.map((r, i) => (
+        <li class="role reveal" style={`--i:${i % 3}`}>
+          <span class="years">{r.years}</span>
+          <span class="title">
+            {r.role} <span class="at">@ {r.company}</span>
+          </span>
+          <span class="stack">{r.stack}</span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <ul class="education reveal">
+    {education.map((e) => <li>{e}</li>)}
+  </ul>
 </section>
 
 <style>
-  section {
-    padding-block: var(--space-section);
+  .section {
+    position: relative;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: var(--space-section) var(--space-gutter);
   }
 
-  .jobs {
+  .roles {
     list-style: none;
     padding: 0;
-    margin-top: 3rem;
   }
 
-  .job {
-    display: grid;
-    grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr);
-    gap: 0.5rem var(--space-gutter);
-    padding-block: 1.75rem;
-    border-top: 1px solid var(--color-line);
-    transition: border-color var(--duration-normal) ease;
+  .role {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.4rem;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-line);
+    transition: border-color var(--duration-normal) var(--ease-out-expo);
   }
 
-  .job:hover {
-    border-top-color: var(--color-accent);
+  .role:hover {
+    border-bottom-color: var(--color-line-hover);
   }
 
   .years {
-    padding-top: 0.4rem;
+    flex: 0 0 7.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    color: var(--color-dim);
   }
 
-  h3 {
-    font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.2rem);
+  .title {
+    flex: 1 1 18rem;
+    font-size: 1.05rem;
+    font-weight: 400;
   }
 
-  .org {
+  .at {
     color: var(--color-accent);
   }
 
-  .job p {
-    margin-top: 0.5rem;
-    max-width: 38rem;
-    color: var(--color-text-dim);
+  .stack {
+    flex: 1 1 20rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-mid);
   }
 
   .education {
-    margin-top: 2.5rem;
-  }
-
-  @media (max-width: 48rem) {
-    .job {
-      grid-template-columns: 1fr;
-    }
+    list-style: none;
+    padding: 0;
+    margin-top: 1.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--color-dim);
   }
 </style>

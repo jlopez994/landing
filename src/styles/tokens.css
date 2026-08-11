@@ -1,29 +1,40 @@
 :root {
-  /* Eclipse palette — warm near-black, cream text, corona gold */
-  --color-bg: oklch(13% 0.01 60);
-  --color-bg-raised: oklch(17% 0.014 60);
-  --color-text: oklch(93% 0.018 85);
-  --color-text-dim: oklch(68% 0.02 80);
-  --color-accent: oklch(78% 0.14 75);
-  --color-accent-hot: oklch(70% 0.19 45);
-  --color-line: oklch(28% 0.02 70);
+  /* Dark technical — near-black surfaces, mint accent */
+  --color-bg: #0b0c0e;
+  --color-card: #111316;
+  --color-card-hover: #16191d;
+  --color-chip: #181c21;
+  --color-line: #23272d;
+  --color-line-hover: #2e5e48;
+  --color-line-accent: #26372f;
 
-  --font-display: "Instrument Serif", Georgia, serif;
-  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  --color-text: #eaecef;
+  --color-text-soft: #c5cad0;
+  --color-mid: #8b9299;
+  --color-dim: #5f666e;
 
-  --text-base: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
-  --text-lead: clamp(1.35rem, 1.1rem + 1.2vw, 2rem);
-  --text-h2: clamp(2.2rem, 1.5rem + 3vw, 4rem);
-  --text-hero: clamp(3rem, 1.4rem + 7.5vw, 7.5rem);
-  --text-label: 0.78rem;
+  --color-accent: #7cf1b4;
+  --color-accent-ink: #07130d;
+  --color-accent-wash: rgba(124, 241, 180, 0.05);
+  --color-accent-glow: rgba(124, 241, 180, 0.5);
+  --color-grid: #12151a;
 
-  --space-section: clamp(5rem, 3.5rem + 8vw, 11rem);
-  --space-gutter: clamp(1.25rem, 0.75rem + 3vw, 4rem);
-  --content-max: 72rem;
+  --font-body: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --duration-fast: 180ms;
-  --duration-normal: 400ms;
-  --duration-slow: 900ms;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --text-mono-sm: 0.7rem;
+  --text-mono: 0.74rem;
+  --text-hero: min(clamp(2.2rem, 5.4vw, 4.6rem), 9vh);
+  --text-card-title: clamp(1.3rem, 2.4vw, 1.8rem);
+
+  --space-section: clamp(2.5rem, 6vw, 4.5rem);
+  --space-gutter: clamp(1.25rem, 4vw, 3rem);
+  --content-max: 76rem;
+
+  --radius-card: 16px;
+  --radius-btn: 10px;
+
+  --duration-normal: 500ms;
+  --duration-slow: 1050ms;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }

@@ -3,41 +3,16 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Projects from "../components/Projects.astro";
 import Experience from "../components/Experience.astro";
-import Skills from "../components/Skills.astro";
+import Stack from "../components/Stack.astro";
 import Contact from "../components/Contact.astro";
 ---
 
 <Layout>
   <Hero />
   <main>
-    <section class="wrap intro" aria-label="About">
-      <p class="reveal">
-        Senior full-stack engineer at <em>Ayesa</em>, with 7+ years across
-        fintech, blockchain and sports tech. On the side I build products end
-        to end — from orbital math to the APK on someone's phone — obsessed
-        with software that stays fast and private with zero bars of signal.
-      </p>
-    </section>
     <Projects />
     <Experience />
-    <Skills />
+    <Stack />
   </main>
   <Contact />
 </Layout>
-
-<style>
-  .intro {
-    padding-block: var(--space-section) 0;
-  }
-
-  .intro p {
-    max-width: 46rem;
-    font-family: var(--font-display);
-    font-size: var(--text-lead);
-    line-height: 1.45;
-  }
-
-  .intro em {
-    color: var(--color-accent);
-  }
-</style>

@@ -2,23 +2,38 @@
 import "../styles/tokens.css";
 import "../styles/global.css";
 
-const title = "Julián López Hervás — Senior Full-Stack Engineer";
-const description =
-  "Senior full-stack engineer in Spain. 7+ years across fintech and blockchain: Angular, Spring Boot, Next.js — plus local-first products in React Native and edge ML.";
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Julián López Hervás — Full-Stack Senior",
+  description = "Ingeniero full-stack senior en Toledo/Madrid. Siete años en fintech, blockchain y producto: Angular, Spring Boot, NestJS, Next.js. Además, apps local-first y ML en el edge.",
+} = Astro.props;
+
+const sections = [
+  { id: "top", label: "inicio" },
+  { id: "work", label: "proyectos" },
+  { id: "exp", label: "experiencia" },
+  { id: "stack", label: "stack" },
+  { id: "contact", label: "contacto" },
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
     />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -27,42 +42,237 @@ const description =
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <slot />
+    <div class="shell">
+      <div class="grid-bg" aria-hidden="true"></div>
+      <div class="glow" aria-hidden="true"></div>
 
-    <!-- Film grain overlay -->
-    <svg class="grain" aria-hidden="true">
-      <filter id="grain-f">
-        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" />
-        <feColorMatrix type="saturate" values="0" />
-      </filter>
-      <rect width="100%" height="100%" filter="url(#grain-f)" />
-    </svg>
+      <nav id="rail" class="rail" aria-label="Progreso de sección">
+        {
+          sections.map((s) => (
+            <a href={`#${s.id}`} data-rail={s.id}>
+              <span class="bar" data-rail-bar></span>
+              {s.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <header class="topbar">
+        <a href="#top" class="brand">
+          <span class="dot" aria-hidden="true"></span>jlopez.dev
+        </a>
+        <nav class="topnav" aria-label="Navegación principal">
+          <a href="#work">work</a>
+          <a href="#exp">experience</a>
+          <a href="#stack">stack</a>
+          <a href="#contact" class="cta">contacto</a>
+        </nav>
+      </header>
+
+      <slot />
+    </div>
 
     <script>
-      const io = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              e.target.classList.add("in");
-              io.unobserve(e.target);
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealables = document.querySelectorAll<HTMLElement>(".reveal");
+
+      if (reduced) {
+        revealables.forEach((el) => el.classList.add("in"));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("in");
+              io.unobserve(entry.target);
             }
-          }
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.06 },
+        );
+        revealables.forEach((el) => io.observe(el));
+      }
+
+      // Side rail: highlight the section occupying the middle of the viewport
+      const railLinks = document.querySelectorAll<HTMLElement>("[data-rail]");
+      const setActive = (id: string) => {
+        railLinks.forEach((link) => {
+          link.classList.toggle("on", link.dataset.rail === id);
+        });
+      };
+
+      const tracked = [...railLinks]
+        .map((link) => document.getElementById(link.dataset.rail!))
+        .filter((el): el is HTMLElement => el !== null);
+
+      const railIo = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActive(visible.target.id);
         },
-        { threshold: 0.15 },
+        { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.2, 0.6] },
       );
-      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      tracked.forEach((section) => railIo.observe(section));
+      setActive("top");
     </script>
   </body>
 </html>
 
 <style>
-  .grain {
-    position: fixed;
+  .shell {
+    position: relative;
+    min-height: 100vh;
+    /* Contains the oversized .glow so it never widens the viewport */
+    overflow-x: clip;
+  }
+
+  /* Blueprint grid, faded out after the first screen */
+  .grid-bg {
+    position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.05;
     pointer-events: none;
-    z-index: 100;
+    background-image:
+      linear-gradient(var(--color-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(#000, transparent 70%);
+    -webkit-mask-image: linear-gradient(#000, transparent 70%);
+  }
+
+  .glow {
+    position: absolute;
+    top: -24rem;
+    left: 50%;
+    transform: translateX(-58%);
+    width: min(90rem, 150vw);
+    height: 44rem;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(124, 241, 180, 0.09) 0%,
+      rgba(124, 241, 180, 0.03) 34%,
+      transparent 68%
+    );
+  }
+
+  .rail {
+    position: fixed;
+    left: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 45;
+    display: none;
+    flex-direction: column;
+    gap: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 80rem) {
+    .rail {
+      display: flex;
+    }
+  }
+
+  .rail a {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--color-dim);
+    transition: color var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .rail a:hover,
+  .rail a.on {
+    color: var(--color-accent);
+  }
+
+  .rail .bar {
+    width: 14px;
+    height: 1px;
+    background: currentColor;
+    transition: width 600ms var(--ease-out-expo);
+  }
+
+  .rail a.on .bar {
+    width: 34px;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem var(--space-gutter);
+    background: rgba(11, 12, 14, 0.78);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .topnav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.85rem, 2vw, 1.7rem);
+    font-family: var(--font-mono);
+    font-size: var(--text-mono);
+    color: var(--color-mid);
+  }
+
+  .topnav a {
+    transition: color var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .topnav a:hover {
+    color: var(--color-accent);
+  }
+
+  .topnav .cta {
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    color: var(--color-text);
+    transition:
+      border-color var(--duration-normal) var(--ease-out-expo),
+      color var(--duration-normal) var(--ease-out-expo),
+      background var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .topnav .cta:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-wash);
   }
 </style>

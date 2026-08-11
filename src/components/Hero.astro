@@ -1,199 +1,140 @@
 ---
-const links = [
-  { label: "GitHub", href: "https://github.com/jlopez994" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/jlopezdev/" },
-  { label: "Email", href: "mailto:contact.jldevelops@gmail.com" },
+const email = "contact.jldevelops@gmail.com";
+
+const stats = [
+  { v: "7+", k: "años desarrollando" },
+  { v: "4+", k: "años en Ibermática · Ayesa" },
+  { v: "2", k: "productos propios publicados" },
+  { v: "100%", k: "cómputo local en eclipsum" },
 ];
 ---
 
-<header class="hero">
-  <nav class="wrap" aria-label="Main navigation">
-    <span class="brand label">jl—dev</span>
-    <ul>
-      <li><a class="label" href="#work">Work</a></li>
-      <li><a class="label" href="#experience">Experience</a></li>
-      <li><a class="label" href="#skills">Skills</a></li>
-      <li><a class="label" href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<section id="top" class="hero">
+  <p class="badge reveal">
+    <span class="dot" aria-hidden="true"></span>abierto a nuevos proyectos
+  </p>
 
-  <div class="wrap stage">
-    <div class="eclipse" aria-hidden="true"></div>
-    <div class="copy">
-      <p class="label eyebrow">Julián López Hervás · Senior Full-Stack Engineer · Spain</p>
-      <h1>
-        Software that works when <em>the cloud doesn't.</em>
-      </h1>
-      <p class="sub">
-        7+ years shipping fintech and blockchain products — Angular and
-        Spring Boot by day, local-first apps and edge ML by night.
-      </p>
-      <ul class="links">
-        {
-          links.map((l) => (
-            <li>
-              <a
-                class="label link"
-                href={l.href}
-                target={l.href.startsWith("http") ? "_blank" : undefined}
-                rel={l.href.startsWith("http") ? "noopener" : undefined}
-              >
-                {l.label} ↗
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
+  <h1 class="reveal">
+    Full-stack senior. Fintech, blockchain y software que funciona{" "}
+    <span class="accent">sin red</span>.
+  </h1>
+
+  <p class="lede reveal">
+    Julián López Hervás. Siete años en la parte del producto que sostiene todo
+    lo demás: Angular y Spring Boot en Ayesa, microservicios con Next.js y
+    NestJS como socio fundador, y por mi cuenta apps que calculan eclipses en
+    el móvil sin tocar un backend.
+  </p>
+
+  <div class="actions reveal">
+    <a href="#work" class="btn btn-primary">ver proyectos →</a>
+    <a href={`mailto:${email}`} class="btn btn-ghost">{email}</a>
   </div>
-</header>
+
+  <dl class="stats reveal">
+    {
+      stats.map((s) => (
+        <div class="stat">
+          <dd>{s.v}</dd>
+          <dt>{s.k}</dt>
+        </div>
+      ))
+    }
+  </dl>
+</section>
 
 <style>
   .hero {
     position: relative;
-    min-height: 100svh;
+    min-height: calc(100dvh - 61px);
     display: flex;
     flex-direction: column;
-    overflow: clip;
+    justify-content: center;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    padding: min(3rem, 4vh) var(--space-gutter) min(2.5rem, 4vh);
   }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    padding-block: 1.5rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    padding: 0;
-  }
-
-  nav a {
-    text-decoration: none;
-    transition: color var(--duration-fast) ease;
-  }
-
-  nav a:hover {
-    color: var(--color-accent);
-  }
-
-  .brand {
-    color: var(--color-text);
-  }
-
-  .stage {
-    position: relative;
-    flex: 1;
-    display: flex;
+  .badge {
+    display: inline-flex;
+    align-self: flex-start;
     align-items: center;
-    width: 100%;
-    padding-block: 4rem;
-  }
-
-  /* Eclipse disc: black moon over breathing corona glow */
-  .eclipse {
-    position: absolute;
-    right: calc(-1 * var(--space-gutter));
-    top: 50%;
-    translate: 20% -55%;
-    width: clamp(18rem, 45vw, 34rem);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: oklch(8% 0.008 60);
-    box-shadow:
-      0 0 60px 8px oklch(78% 0.14 75 / 0.35),
-      0 0 160px 30px oklch(70% 0.19 45 / 0.2),
-      inset 0 0 40px oklch(0% 0 0 / 0.9);
-    animation: breathe 7s ease-in-out infinite;
-  }
-
-  .eclipse::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 50%;
-    border: 1px solid oklch(78% 0.14 75 / 0.55);
-    filter: blur(1px);
-  }
-
-  @keyframes breathe {
-    50% {
-      box-shadow:
-        0 0 80px 12px oklch(78% 0.14 75 / 0.45),
-        0 0 200px 40px oklch(70% 0.19 45 / 0.28),
-        inset 0 0 40px oklch(0% 0 0 / 0.9);
-    }
-  }
-
-  .copy {
-    position: relative;
-    z-index: 1;
-    max-width: 56rem;
-  }
-
-  .eyebrow {
+    gap: 0.5rem;
+    border: 1px solid var(--color-line-accent);
+    background: var(--color-accent-wash);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    margin-bottom: min(1.7rem, 2.6vh);
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
     color: var(--color-accent);
-    margin-bottom: 1.5rem;
+    white-space: nowrap;
+  }
+
+  .badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
   }
 
   h1 {
     font-size: var(--text-hero);
-    letter-spacing: -0.015em;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    max-width: 46rem;
   }
 
-  h1 em {
+  h1 .accent {
     color: var(--color-accent);
-    font-style: italic;
+    white-space: nowrap;
   }
 
-  .sub {
-    margin-top: 2rem;
-    max-width: 34rem;
-    font-size: var(--text-lead);
-    line-height: 1.4;
-    color: var(--color-text-dim);
+  .lede {
+    margin-top: min(1.5rem, 2.4vh);
+    max-width: 36rem;
+    font-size: min(1.02rem, 2.7vh);
+    line-height: 1.62;
+    color: var(--color-mid);
   }
 
-  .links {
+  .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.25rem 2.5rem;
-    list-style: none;
-    padding: 0;
-    margin-top: 3rem;
+    gap: 0.85rem;
+    margin-top: min(2.1rem, 3.2vh);
   }
 
-  .link {
-    color: var(--color-text);
-    text-decoration: none;
-    padding-block: 0.5rem;
-    border-bottom: 1px solid var(--color-line);
-    transition:
-      color var(--duration-fast) ease,
-      border-color var(--duration-fast) ease;
+  /* Hairline grid: 1px gaps over the border colour read as dividers */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+    gap: 1px;
+    margin-top: min(clamp(2.2rem, 4.5vw, 3.4rem), 4.2vh);
+    background: var(--color-line);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    overflow: hidden;
   }
 
-  .link:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+  .stat {
+    background: var(--color-card);
+    padding: min(1.15rem, 1.9vh) 1.35rem;
   }
 
-  @media (max-width: 48rem) {
-    .eclipse {
-      right: 50%;
-      top: 0;
-      translate: 50% -35%;
-      opacity: 0.8;
-    }
+  .stat dd {
+    margin: 0;
+    font-size: min(1.6rem, 3.4vh);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
 
-    .stage {
-      align-items: flex-end;
-    }
+  .stat dt {
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    color: var(--color-dim);
+    line-height: 1.4;
   }
 </style>
