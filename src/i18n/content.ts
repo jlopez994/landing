@@ -42,7 +42,7 @@ export const content = {
       badge: "abierto a nuevos proyectos",
       title: "Siete años de ingeniería full-stack. Ahora,",
       titleAccent: "a velocidad de IA",
-      lede: "Julián López Hervás. Fintech, blockchain, seguros y sector público: Angular y Spring Boot en Ayesa, proyectos propios de finanzas y deporte con Next.js y NestJS, y apps local-first que funcionan sin backend. Trabajo con agentes de IA integrados en el flujo diario, del diseño al despliegue.",
+      lede: "Julián López Hervás. Fintech, blockchain, seguros y sector público: aplicaciones críticas en Ayesa, productos propios de finanzas y deporte, y apps local-first que funcionan sin backend. Los agentes de IA van dentro del flujo diario, del diseño al despliegue.",
       cta: "ver proyectos →",
       stats: [
         { v: "7+", k: "años desarrollando" },
@@ -61,7 +61,7 @@ export const content = {
           scope: "proyecto personal",
           metric: "sin backend",
           title: "Eclipsum — compañero de eclipses solares",
-          body: "App Android para el eclipse total del 12 de agosto de 2026 sobre España. Calcula contactos C1–C4, obscuración y duración de la totalidad para cualquier coordenada, 100 % en el dispositivo con astronomy-engine. Mapa de la banda de totalidad, alertas locales exactas por contacto, nubosidad cacheada offline y un modo eclipse a pantalla completa que avisa de cuándo ponerse y quitarse las gafas.",
+          body: "App Android para el eclipse total del 12 de agosto de 2026 sobre España. Calcula contactos C1–C4, obscuración y duración de la totalidad para cualquier coordenada, entera en el dispositivo. Un modo eclipse a pantalla completa avisa de cuándo ponerse y quitarse las gafas, con la banda de totalidad en mapa y la nubosidad cacheada para el día sin cobertura.",
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
           arch: {
@@ -80,7 +80,7 @@ export const content = {
           scope: "proyecto personal",
           metric: "wake word propia",
           title: "Rufus — asistente de voz privado",
-          body: "Asistente que nunca envía tu audio a ningún sitio. Wake word «Rufus» entrenada con openWakeWord combinando voces sintéticas en español y grabaciones reales, exportada a ONNX y ejecutándose entera en el edge. El pipeline de entrenamiento es un notebook de Colab reproducible.",
+          body: "Asistente que nunca envía tu audio a ningún sitio. La wake word «Rufus» está entrenada mezclando voces sintéticas en español con grabaciones reales, y se ejecuta entera en el dispositivo. El pipeline de entrenamiento es un notebook de Colab reproducible.",
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
           arch: {
@@ -99,7 +99,7 @@ export const content = {
           scope: "Ayesa",
           metric: "sector público",
           title: "Gestión de expedientes de evaluación docente — EHU",
-          body: "Aplicación para la Universidad del País Vasco (EHU) que gestiona los expedientes de evaluación del profesorado. Frontend en Angular y backend en Java con Spring Boot, desplegado sobre Kubernetes.",
+          body: "Aplicación para la Universidad del País Vasco (EHU) que gestiona los expedientes de evaluación del profesorado y el seguimiento de cada uno.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Helm", "SonarQube"],
           href: null,
           arch: {
@@ -118,7 +118,7 @@ export const content = {
           scope: "Ayesa",
           metric: "multi-perfil",
           title: "Panel de administración — Mutua Montañesa",
-          body: "Panel de gestión para una mutua colaboradora con la Seguridad Social, con áreas y permisos diferenciados para empresas, asesorías y usuarios. Angular en el frontend, Java con Spring Boot en el backend y despliegue sobre Kubernetes.",
+          body: "Panel de gestión para una mutua colaboradora con la Seguridad Social. Empresas, asesorías y usuarios entran cada uno a su propia área, con permisos y datos separados.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Grafana"],
           href: null,
           arch: {
@@ -224,7 +224,7 @@ export const content = {
       badge: "open to new projects",
       title: "Seven years of full-stack engineering. Now,",
       titleAccent: "at AI speed",
-      lede: "Julián López Hervás. Fintech, blockchain, insurance and public sector: Angular and Spring Boot at Ayesa, my own finance and sports projects in Next.js and NestJS, and local-first apps that run with no backend at all. I work with AI agents wired into my daily flow, from design to deployment.",
+      lede: "Julián López Hervás. Fintech, blockchain, insurance and public sector: business-critical apps at Ayesa, my own finance and sports products, and local-first apps that run with no backend at all. AI agents sit inside the daily flow, from design to deployment.",
       cta: "see projects →",
       stats: [
         { v: "7+", k: "years shipping software" },
@@ -243,7 +243,7 @@ export const content = {
           scope: "personal project",
           metric: "no backend",
           title: "Eclipsum — solar eclipse companion",
-          body: "Android app for the total eclipse of August 12, 2026 over Spain. It computes C1–C4 contacts, obscuration and totality duration for any coordinate, 100% on-device with astronomy-engine. Path-of-totality map, exact local alerts per contact, cloud cover cached offline, and a full-screen eclipse mode that tells you when to put your glasses on and take them off.",
+          body: "Android app for the total eclipse of August 12, 2026 over Spain. It computes C1–C4 contacts, obscuration and totality duration for any coordinate, entirely on the device. A full-screen eclipse mode tells you when to put your glasses on and take them off, with the path of totality on a map and cloud cover cached for the day you have no signal.",
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
           arch: {
@@ -262,7 +262,7 @@ export const content = {
           scope: "personal project",
           metric: "custom wake word",
           title: "Rufus — private voice assistant",
-          body: "An assistant that never sends your audio anywhere. The “Rufus” wake word is trained with openWakeWord, mixing Spanish synthetic voices with real recordings, exported to ONNX and running entirely on the edge. The training pipeline is a reproducible Colab notebook.",
+          body: "An assistant that never sends your audio anywhere. The “Rufus” wake word is trained by mixing Spanish synthetic voices with real recordings, and runs entirely on the device. The training pipeline is a reproducible Colab notebook.",
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
           arch: {
@@ -281,7 +281,7 @@ export const content = {
           scope: "Ayesa",
           metric: "public sector",
           title: "Faculty evaluation case management — EHU",
-          body: "Application for the University of the Basque Country (EHU) that manages faculty evaluation case files. Angular on the frontend, Java with Spring Boot on the backend, deployed on Kubernetes.",
+          body: "Application for the University of the Basque Country (EHU) that manages faculty evaluation case files and tracks each one.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Helm", "SonarQube"],
           href: null,
           arch: {
@@ -300,7 +300,7 @@ export const content = {
           scope: "Ayesa",
           metric: "multi-role",
           title: "Admin panel — Mutua Montañesa",
-          body: "Management panel for a Spanish occupational insurance mutual, with separate areas and permissions for companies, advisory firms and individual users. Angular on the frontend, Java with Spring Boot on the backend and Kubernetes deployments.",
+          body: "Management panel for a Spanish occupational insurance mutual. Companies, advisory firms and individual users each get their own area, with separate permissions and data.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Grafana"],
           href: null,
           arch: {
