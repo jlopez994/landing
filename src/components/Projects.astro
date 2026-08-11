@@ -28,7 +28,7 @@ const { t } = Astro.props;
           <Tag class:list={["card", "reveal", { linked: p.href }]} style={`--i:${i % 3}`} {...linkProps}>
             <div class="card-meta">
               <span>
-                {p.num} · {p.year} · {p.scope}
+                {String(i + 1).padStart(2, "0")} · {p.year} · {p.scope}
               </span>
               <span class="metric">{p.metric}</span>
             </div>
