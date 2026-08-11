@@ -1,0 +1,117 @@
+---
+const jobs = [
+  {
+    years: "2024 — now",
+    role: "Senior Software Engineer",
+    org: "Ayesa",
+    detail:
+      "Frontend and backend on critical apps — Angular, Spring Boot, SOLID. Madrid.",
+  },
+  {
+    years: "2022 — 2024",
+    role: "Co-founder & Lead Developer",
+    org: "Asistencia y Gestión Deportiva",
+    detail:
+      "Sports-tech platform on cloud microservices — Next.js, NestJS, MySQL, MongoDB, Redis, Socket.IO.",
+  },
+  {
+    years: "2022 — 2024",
+    role: "Senior Software Engineer",
+    org: "Ibermática",
+    detail:
+      "Angular on an NX monorepo with NGRX and AWS, GitLab CI — in a 4-dev frontend team.",
+  },
+  {
+    years: "2020 — 2021",
+    role: "Full-Stack Developer",
+    org: "BOLTIA",
+    detail:
+      "Lead dev and technical mentor — Angular 11, Node.js, Linux deployments with PM2.",
+  },
+  {
+    years: "2018 — 2021",
+    role: "Freelance Full-Stack Developer",
+    org: "Blockchain & crypto",
+    detail:
+      "Lead developer on a crypto product — Angular 7→12, Node.js, Docker Swarm, GitLab CI.",
+  },
+];
+
+const education =
+  "BSc Computer Engineering, Universidad Rey Juan Carlos · Higher Technician in Web Development";
+---
+
+<section id="experience" aria-labelledby="experience-heading">
+  <div class="wrap">
+    <h2 id="experience-heading" class="label reveal">Experience</h2>
+    <ol class="jobs">
+      {
+        jobs.map((j) => (
+          <li class="job reveal">
+            <span class="years label">{j.years}</span>
+            <div>
+              <h3>
+                {j.role} <span class="org">· {j.org}</span>
+              </h3>
+              <p>{j.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="education label reveal">{education}</p>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-block: var(--space-section);
+  }
+
+  .jobs {
+    list-style: none;
+    padding: 0;
+    margin-top: 3rem;
+  }
+
+  .job {
+    display: grid;
+    grid-template-columns: minmax(9rem, 1fr) minmax(0, 4fr);
+    gap: 0.5rem var(--space-gutter);
+    padding-block: 1.75rem;
+    border-top: 1px solid var(--color-line);
+    transition: border-color var(--duration-normal) ease;
+  }
+
+  .job:hover {
+    border-top-color: var(--color-accent);
+  }
+
+  .years {
+    padding-top: 0.4rem;
+  }
+
+  h3 {
+    font-size: clamp(1.4rem, 1.1rem + 1.5vw, 2.2rem);
+  }
+
+  .org {
+    color: var(--color-accent);
+  }
+
+  .job p {
+    margin-top: 0.5rem;
+    max-width: 38rem;
+    color: var(--color-text-dim);
+  }
+
+  .education {
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 48rem) {
+    .job {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
