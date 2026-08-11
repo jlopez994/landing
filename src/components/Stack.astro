@@ -1,43 +1,24 @@
 ---
-const groups = [
-  {
-    label: "lenguajes",
-    items: ["TypeScript", "JavaScript", "Java", "Python", "SQL"],
-  },
-  {
-    label: "frontend",
-    items: ["Angular", "NGRX", "React", "Next.js", "React Native", "Astro"],
-  },
-  {
-    label: "backend",
-    items: ["Spring Boot", "NestJS", "Node.js", "REST", "Socket.IO"],
-  },
-  {
-    label: "datos",
-    items: ["MySQL", "MongoDB", "Redis", "Firebase"],
-  },
-  {
-    label: "infraestructura",
-    items: ["Docker", "Kubernetes", "GitLab CI", "Jenkins", "AWS", "Debian"],
-  },
-  {
-    label: "edge ml",
-    items: ["openWakeWord", "ONNX", "Piper TTS", "pipelines de entrenamiento"],
-  },
-];
+import type { Content } from "../i18n/content";
+
+interface Props {
+  t: Content["stack"];
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="stack" class="section">
   <div class="section-head reveal">
     <span class="idx">03</span>
-    <h2>Stack</h2>
+    <h2>{t.heading}</h2>
     <span class="rule"></span>
-    <span class="meta">día a día</span>
+    <span class="meta">{t.meta}</span>
   </div>
 
   <div class="grid">
     {
-      groups.map((g, i) => (
+      t.groups.map((g, i) => (
         <article class="card reveal" style={`--i:${i % 3}`}>
           <h3>{g.label}</h3>
           <ul>

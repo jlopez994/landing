@@ -1,39 +1,33 @@
 ---
-const email = "contact.jldevelops@gmail.com";
+import { EMAIL, type Content } from "../i18n/content";
 
-const stats = [
-  { v: "7+", k: "años desarrollando" },
-  { v: "4+", k: "años en Ibermática · Ayesa" },
-  { v: "2", k: "productos propios publicados" },
-  { v: "100%", k: "cómputo local en eclipsum" },
-];
+interface Props {
+  t: Content["hero"];
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="top" class="hero">
   <p class="badge reveal">
-    <span class="dot" aria-hidden="true"></span>abierto a nuevos proyectos
+    <span class="dot" aria-hidden="true"></span>{t.badge}
   </p>
 
   <h1 class="reveal">
-    Full-stack senior. Fintech, blockchain y software que funciona{" "}
-    <span class="accent">sin red</span>.
+    {t.title}{" "}
+    <span class="accent">{t.titleAccent}</span>.
   </h1>
 
-  <p class="lede reveal">
-    Julián López Hervás. Siete años en la parte del producto que sostiene todo
-    lo demás: Angular y Spring Boot en Ayesa, microservicios con Next.js y
-    NestJS como socio fundador, y por mi cuenta apps que calculan eclipses en
-    el móvil sin tocar un backend.
-  </p>
+  <p class="lede reveal">{t.lede}</p>
 
   <div class="actions reveal">
-    <a href="#work" class="btn btn-primary">ver proyectos →</a>
-    <a href={`mailto:${email}`} class="btn btn-ghost">{email}</a>
+    <a href="#work" class="btn btn-primary">{t.cta}</a>
+    <a href={`mailto:${EMAIL}`} class="btn btn-ghost">{EMAIL}</a>
   </div>
 
   <dl class="stats reveal">
     {
-      stats.map((s) => (
+      t.stats.map((s) => (
         <div class="stat">
           <dd>{s.v}</dd>
           <dt>{s.k}</dt>
@@ -82,7 +76,7 @@ const stats = [
     font-size: var(--text-hero);
     line-height: 1.04;
     letter-spacing: -0.04em;
-    max-width: 46rem;
+    max-width: 52rem;
   }
 
   h1 .accent {
@@ -92,7 +86,7 @@ const stats = [
 
   .lede {
     margin-top: min(1.5rem, 2.4vh);
-    max-width: 36rem;
+    max-width: 38rem;
     font-size: min(1.02rem, 2.7vh);
     line-height: 1.62;
     color: var(--color-mid);

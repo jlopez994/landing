@@ -1,44 +1,43 @@
 ---
 import "../styles/tokens.css";
 import "../styles/global.css";
+import { content, languages, localeHref, type Lang } from "../i18n/content";
 
 interface Props {
-  title?: string;
-  description?: string;
+  lang: Lang;
 }
 
-const {
-  title = "Julián López Hervás — Full-Stack Senior",
-  description = "Ingeniero full-stack senior en Toledo/Madrid. Siete años en fintech, blockchain y producto: Angular, Spring Boot, NestJS, Next.js. Además, apps local-first y ML en el edge.",
-} = Astro.props;
-
-const sections = [
-  { id: "top", label: "inicio" },
-  { id: "work", label: "proyectos" },
-  { id: "exp", label: "experiencia" },
-  { id: "stack", label: "stack" },
-  { id: "contact", label: "contacto" },
-];
+const { lang } = Astro.props;
+const t = content[lang];
+const nav = t.nav;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(localeHref(lang), Astro.site)} />
+    {
+      languages.map((l) => (
+        <link rel="alternate" hreflang={l} href={new URL(localeHref(l), Astro.site)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={new URL("/og.png", Astro.url)} />
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : "en_US"} />
+    <meta property="og:image" content={new URL("/og.png", Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
@@ -46,9 +45,9 @@ const sections = [
       <div class="grid-bg" aria-hidden="true"></div>
       <div class="glow" aria-hidden="true"></div>
 
-      <nav id="rail" class="rail" aria-label="Progreso de sección">
+      <nav id="rail" class="rail" aria-label={nav.railLabel}>
         {
-          sections.map((s) => (
+          nav.rail.map((s) => (
             <a href={`#${s.id}`} data-rail={s.id}>
               <span class="bar" data-rail-bar></span>
               {s.label}
@@ -61,11 +60,23 @@ const sections = [
         <a href="#top" class="brand">
           <span class="dot" aria-hidden="true"></span>jlopez.dev
         </a>
-        <nav class="topnav" aria-label="Navegación principal">
-          <a href="#work">work</a>
-          <a href="#exp">experience</a>
-          <a href="#stack">stack</a>
-          <a href="#contact" class="cta">contacto</a>
+        <nav class="topnav" aria-label={nav.navLabel}>
+          {nav.links.map((l) => <a href={l.href}>{l.label}</a>)}
+          <a href="#contact" class="cta">{nav.cta}</a>
+          <span class="langs" role="group" aria-label={nav.langLabel}>
+            {
+              languages.map((l) => (
+                <a
+                  href={localeHref(l)}
+                  class:list={["lang", { on: l === lang }]}
+                  hreflang={l}
+                  aria-current={l === lang ? "true" : undefined}
+                >
+                  {l}
+                </a>
+              ))
+            }
+          </span>
         </nav>
       </header>
 
@@ -251,11 +262,11 @@ const sections = [
     color: var(--color-mid);
   }
 
-  .topnav a {
+  .topnav > a {
     transition: color var(--duration-normal) var(--ease-out-expo);
   }
 
-  .topnav a:hover {
+  .topnav > a:hover {
     color: var(--color-accent);
   }
 
@@ -274,5 +285,40 @@ const sections = [
     border-color: var(--color-accent);
     color: var(--color-accent);
     background: var(--color-accent-wash);
+  }
+
+  .langs {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-left: 0.35rem;
+    border-left: 1px solid var(--color-line);
+  }
+
+  .lang {
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.35rem;
+    border-radius: 5px;
+    color: var(--color-dim);
+    transition:
+      color var(--duration-normal) var(--ease-out-expo),
+      background var(--duration-normal) var(--ease-out-expo);
+  }
+
+  .lang:hover {
+    color: var(--color-accent);
+  }
+
+  .lang.on {
+    color: var(--color-accent);
+    background: var(--color-accent-wash);
+  }
+
+  /* Hide secondary nav links on small screens; the rail and CTA carry it */
+  @media (max-width: 34rem) {
+    .topnav > a:not(.cta) {
+      display: none;
+    }
   }
 </style>

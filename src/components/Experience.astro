@@ -1,55 +1,24 @@
 ---
-const roles = [
-  {
-    years: "2024 — hoy",
-    role: "Analista Programador Senior",
-    company: "Ayesa",
-    stack: "Frontend y backend de aplicaciones críticas con Angular y Spring Boot, siguiendo principios SOLID.",
-  },
-  {
-    years: "2022 — 2024",
-    role: "Socio fundador y desarrollador principal",
-    company: "Asistencia y Gestión Deportiva",
-    stack: "Plataforma de gestión deportiva sobre microservicios cloud: Next.js, NestJS, MySQL, MongoDB, Redis y Socket.IO.",
-  },
-  {
-    years: "2022 — 2024",
-    role: "Analista Programador Senior",
-    company: "Ibermática",
-    stack: "Angular sobre monorepo NX con NGRX y AWS, despliegue con GitLab CI en un equipo de cuatro frontends.",
-  },
-  {
-    years: "2020 — 2021",
-    role: "Desarrollador Full-Stack",
-    company: "BOLTIA",
-    stack: "Referente técnico y mentor de un perfil junior. Angular 11, Node.js y despliegues Linux con PM2.",
-  },
-  {
-    years: "2018 — 2021",
-    role: "Desarrollador Full-Stack freelance",
-    company: "Blockchain y criptomonedas",
-    stack: "Desarrollador principal de un producto cripto: Angular 7→12, Node.js, Docker Swarm y GitLab CI.",
-  },
-];
+import type { Content } from "../i18n/content";
 
-const education = [
-  "Ingeniería Informática · Universidad Rey Juan Carlos (2015 — 2020)",
-  "Técnico Superior en Desarrollo de Aplicaciones Web (2013 — 2015)",
-  "Inglés · nivel profesional completo",
-];
+interface Props {
+  t: Content["experience"];
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="exp" class="section">
   <div class="section-head reveal">
     <span class="idx">02</span>
-    <h2>Experiencia</h2>
+    <h2>{t.heading}</h2>
     <span class="rule"></span>
-    <span class="meta">2018 — hoy</span>
+    <span class="meta">{t.meta}</span>
   </div>
 
   <ol class="roles">
     {
-      roles.map((r, i) => (
+      t.roles.map((r, i) => (
         <li class="role reveal" style={`--i:${i % 3}`}>
           <span class="years">{r.years}</span>
           <span class="title">
@@ -62,7 +31,7 @@ const education = [
   </ol>
 
   <ul class="education reveal">
-    {education.map((e) => <li>{e}</li>)}
+    {t.education.map((e) => <li>{e}</li>)}
   </ul>
 </section>
 

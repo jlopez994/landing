@@ -1,12 +1,11 @@
 ---
-const email = "contact.jldevelops@gmail.com";
+import { EMAIL, SOCIAL, type Content } from "../i18n/content";
 
-const links = [
-  { label: "github", href: "https://github.com/jlopez994" },
-  { label: "linkedin", href: "https://www.linkedin.com/in/jlopezdev/" },
-  { label: "telegram", href: "https://telegram.me/jlopez_dev" },
-];
+interface Props {
+  t: Content["contact"];
+}
 
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -14,14 +13,14 @@ const year = new Date().getFullYear();
   <div class="panel reveal">
     <div class="panel-glow" aria-hidden="true"></div>
     <div class="pitch">
-      <h2>¿Trabajamos juntos?</h2>
-      <p>Respondo en menos de 24 horas. Cuéntame el problema, no la solución.</p>
+      <h2>{t.heading}</h2>
+      <p>{t.body}</p>
     </div>
     <div class="channels">
-      <a href={`mailto:${email}`} class="btn btn-primary mail">{email}</a>
+      <a href={`mailto:${EMAIL}`} class="btn btn-primary mail">{EMAIL}</a>
       <div class="social">
         {
-          links.map((l) => (
+          SOCIAL.map((l) => (
             <a href={l.href} target="_blank" rel="noopener">
               {l.label}
             </a>
@@ -33,7 +32,7 @@ const year = new Date().getFullYear();
 
   <footer>
     <span>© {year} Julián López Hervás</span>
-    <span>Toledo · Madrid · UTC+2</span>
+    <span>{t.location}</span>
   </footer>
 </section>
 

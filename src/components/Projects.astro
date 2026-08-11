@@ -1,57 +1,47 @@
 ---
-const projects = [
-  {
-    num: "01",
-    year: "2026",
-    metric: "sin backend",
-    title: "eclipsum — compañero de eclipses solares",
-    body: "App Android para el eclipse total del 12 de agosto de 2026 sobre España. Calcula contactos C1–C4, obscuración y duración de la totalidad para cualquier coordenada, 100 % en el dispositivo con astronomy-engine. Mapa de la banda de totalidad, alertas locales exactas por contacto, nubosidad cacheada offline y un modo eclipse a pantalla completa que avisa de cuándo ponerse y quitarse las gafas.",
-    tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
-    href: "https://github.com/jlopez994/eclipsum",
-  },
-  {
-    num: "02",
-    year: "2026",
-    metric: "wake word propia",
-    title: "rufus — asistente de voz privado",
-    body: "Asistente que nunca envía tu audio a ningún sitio. Wake word «Rufus» entrenada con openWakeWord combinando voces sintéticas en español y grabaciones reales, exportada a ONNX y ejecutándose entera en el edge. El pipeline de entrenamiento es un notebook de Colab reproducible.",
-    tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
-    href: "https://github.com/jlopez994/rufus-playbooks",
-  },
-];
+import type { Content } from "../i18n/content";
+
+interface Props {
+  t: Content["projects"];
+}
+
+const { t } = Astro.props;
 ---
 
 <section id="work" class="section">
   <div class="section-head reveal">
     <span class="idx">01</span>
-    <h2>Proyectos</h2>
+    <h2>{t.heading}</h2>
     <span class="rule"></span>
-    <span class="meta">código abierto</span>
+    <span class="meta">{t.meta}</span>
   </div>
 
   <div class="cards">
     {
-      projects.map((p, i) => (
-        <a
-          class="card reveal"
-          style={`--i:${i}`}
-          href={p.href}
-          target="_blank"
-          rel="noopener"
-        >
-          <div class="card-meta">
-            <span>{p.num} · {p.year}</span>
-            <span class="metric">{p.metric}</span>
-          </div>
-          <h3>{p.title}</h3>
-          <p>{p.body}</p>
-          <div class="tags">
-            {p.tags.map((t) => (
-              <span class="chip">{t}</span>
-            ))}
-          </div>
-        </a>
-      ))
+      t.items.map((p, i) => {
+        // Client work has no public repo, so it renders as a plain card
+        const Tag = p.href ? "a" : "article";
+        const linkProps = p.href
+          ? { href: p.href, target: "_blank", rel: "noopener" }
+          : {};
+        return (
+          <Tag class:list={["card", "reveal", { linked: p.href }]} style={`--i:${i % 3}`} {...linkProps}>
+            <div class="card-meta">
+              <span>
+                {p.num} · {p.year} · {p.scope}
+              </span>
+              <span class="metric">{p.metric}</span>
+            </div>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            <div class="tags">
+              {p.tags.map((tag) => (
+                <span class="chip">{tag}</span>
+              ))}
+            </div>
+          </Tag>
+        );
+      })
     }
   </div>
 </section>
@@ -86,8 +76,12 @@ const projects = [
 
   .card:hover {
     border-color: var(--color-line-hover);
-    transform: translateY(-3px);
     background: var(--color-card-hover);
+  }
+
+  /* Only cards that go somewhere lift on hover */
+  .card.linked:hover {
+    transform: translateY(-3px);
   }
 
   .card-meta {
