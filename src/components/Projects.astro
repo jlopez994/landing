@@ -79,13 +79,6 @@ const { t } = Astro.props;
 </section>
 
 <style>
-  .section {
-    position: relative;
-    max-width: var(--content-max);
-    margin-inline: auto;
-    padding: var(--space-section) var(--space-gutter);
-  }
-
   .work-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -156,13 +149,19 @@ const { t } = Astro.props;
     padding: 0;
   }
 
+  /* Nodes ship visible so the diagram still reads without JS; the script dims them */
   .node {
     transition:
       opacity 600ms var(--ease-out-expo),
       transform 600ms var(--ease-out-expo);
   }
 
-  /* Connector stub between consecutive nodes */
+  .node.off {
+    opacity: 0.16;
+    transform: translateY(12px);
+  }
+
+  /* Connector stub between consecutive nodes, tinted once the flow has passed */
   .node:not(:last-child)::after {
     content: "";
     display: block;
@@ -170,6 +169,17 @@ const { t } = Astro.props;
     height: 0.6rem;
     margin-left: 1.35rem;
     background: var(--color-line);
+    transition: background 600ms var(--ease-out-expo);
+  }
+
+  .node.on:not(.lead)::after {
+    background: var(--color-line-hover);
+  }
+
+  /* Last revealed node — where the reader currently is in the flow */
+  .node.lead .node-box {
+    border-color: var(--color-line-hover);
+    background: var(--color-card-hover);
   }
 
   .node-box {
@@ -351,9 +361,9 @@ const { t } = Astro.props;
         ? nodes.length
         : Math.max(1, Math.ceil(progress * (nodes.length + 0.4)));
       nodes.forEach((node, i) => {
-        const on = i < shown;
-        node.style.opacity = on ? "1" : "0.16";
-        node.style.transform = on ? "none" : "translateY(12px)";
+        node.classList.toggle("on", i < shown);
+        node.classList.toggle("off", i >= shown);
+        node.classList.toggle("lead", i === shown - 1);
       });
     };
 

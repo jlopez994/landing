@@ -60,6 +60,14 @@ section[id] {
   scroll-margin-top: 4.5rem;
 }
 
+/* Every content section shares the same measure and rhythm */
+.section {
+  position: relative;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding: var(--space-section) var(--space-gutter);
+}
+
 /* Section heading rule: 01 ── Título ──────────── */
 .section-head {
   display: flex;
