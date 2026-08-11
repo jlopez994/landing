@@ -55,6 +55,11 @@ h3 {
   padding-inline: var(--space-gutter);
 }
 
+/* Anchor jumps clear the sticky topbar (~61px) with room to breathe */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
 /* Section heading rule: 01 ── Título ──────────── */
 .section-head {
   display: flex;
