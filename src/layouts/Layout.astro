@@ -103,27 +103,12 @@ const nav = t.nav;
         revealables.forEach((el) => io.observe(el));
       }
 
-      // How many architecture bands are lit by the time you reach each section
-      const BANDS_BY_SECTION: Record<string, number> = {
-        top: 1,
-        work: 2,
-        exp: 3,
-        stack: 4,
-        contact: 4,
-      };
-      const bands = document.querySelectorAll<SVGElement>("[data-band]");
-      const links = document.querySelectorAll<SVGElement>("[data-link]");
-
       // Side rail: highlight the section occupying the middle of the viewport
       const railLinks = document.querySelectorAll<HTMLElement>("[data-rail]");
       const setActive = (id: string) => {
         railLinks.forEach((link) => {
           link.classList.toggle("on", link.dataset.rail === id);
         });
-
-        const lit = BANDS_BY_SECTION[id] ?? 1;
-        bands.forEach((band, i) => band.classList.toggle("on", i < lit));
-        links.forEach((link, i) => link.classList.toggle("on", i + 1 < lit));
       };
 
       const tracked = [...railLinks]

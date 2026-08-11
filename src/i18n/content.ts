@@ -38,9 +38,6 @@ export const content = {
       navLabel: "Navegación principal",
       langLabel: "Cambiar idioma",
     },
-    viz: {
-      layers: ["cliente", "api", "datos", "infra"],
-    },
     hero: {
       badge: "abierto a nuevos proyectos",
       title: "Siete años de ingeniería full-stack. Ahora,",
@@ -49,9 +46,9 @@ export const content = {
       cta: "ver proyectos →",
       stats: [
         { v: "7+", k: "años desarrollando" },
-        { v: "4+", k: "en Ibermática · Ayesa" },
-        { v: "2", k: "productos propios" },
-        { v: "5", k: "sectores distintos" },
+        { v: "4+", k: "años en Ibermática · Ayesa" },
+        { v: "2", k: "productos propios publicados" },
+        { v: "5", k: "sectores en producción" },
       ],
     },
     projects: {
@@ -183,9 +180,6 @@ export const content = {
       navLabel: "Main navigation",
       langLabel: "Change language",
     },
-    viz: {
-      layers: ["client", "api", "data", "infra"],
-    },
     hero: {
       badge: "open to new projects",
       title: "Seven years of full-stack engineering. Now,",
@@ -193,10 +187,10 @@ export const content = {
       lede: "Julián López Hervás. Fintech, blockchain, insurance and public sector: Angular and Spring Boot at Ayesa, my own finance and sports projects in Next.js and NestJS, and local-first apps that run with no backend at all. I work with AI agents wired into my daily flow, from design to deployment.",
       cta: "see projects →",
       stats: [
-        { v: "7+", k: "years shipping" },
-        { v: "4+", k: "at Ibermática · Ayesa" },
-        { v: "2", k: "products of my own" },
-        { v: "5", k: "sectors shipped" },
+        { v: "7+", k: "years shipping software" },
+        { v: "4+", k: "years at Ibermática · Ayesa" },
+        { v: "2", k: "products of my own released" },
+        { v: "5", k: "sectors in production" },
       ],
     },
     projects: {
