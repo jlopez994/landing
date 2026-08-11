@@ -1,0 +1,173 @@
+---
+// Source for public/og.png. Open at /og, screenshot the 1200x630 viewport.
+import "../styles/tokens.css";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OG card source</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="card">
+      <div class="grid-bg"></div>
+      <div class="glow"></div>
+
+      <header>
+        <span class="dot"></span>jlh.app
+      </header>
+
+      <main>
+        <p class="eyebrow">Julián López Hervás · Toledo · Madrid</p>
+        <h1>
+          Siete años de ingeniería full-stack.<br />
+          Ahora, <span class="accent">a velocidad de IA</span>.
+        </h1>
+        <ul class="chips">
+          <li>Angular</li>
+          <li>Spring Boot</li>
+          <li>Next.js</li>
+          <li>NestJS</li>
+          <li>Kubernetes</li>
+        </ul>
+      </main>
+
+      <footer>
+        <span>Senior Full-Stack Engineer</span>
+        <span>fintech · blockchain · seguros · público · deporte</span>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  :global(html),
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    background: var(--color-bg);
+  }
+
+  .card {
+    /* This page skips global.css, so set the border-box rule locally */
+    box-sizing: border-box;
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 56px 64px;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--color-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(#000, transparent 78%);
+    -webkit-mask-image: linear-gradient(#000, transparent 78%);
+  }
+
+  .glow {
+    position: absolute;
+    top: -320px;
+    left: 48%;
+    transform: translateX(-50%);
+    width: 1300px;
+    height: 700px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(124, 241, 180, 0.13) 0%,
+      rgba(124, 241, 180, 0.04) 36%,
+      transparent 68%
+    );
+  }
+
+  header,
+  main,
+  footer {
+    position: relative;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .eyebrow {
+    margin: 0 0 22px;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 62px;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 34px 0 0;
+  }
+
+  .chips li {
+    font-family: var(--font-mono);
+    font-size: 17px;
+    color: var(--color-text-soft);
+    background: var(--color-chip);
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 8px 14px;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-line);
+    font-family: var(--font-mono);
+    font-size: 17px;
+    color: var(--color-dim);
+  }
+</style>
