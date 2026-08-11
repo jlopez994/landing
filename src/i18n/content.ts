@@ -48,7 +48,7 @@ export const content = {
         { v: "7+", k: "años desarrollando" },
         { v: "4+", k: "años en Ibermática · Ayesa" },
         { v: "2", k: "productos propios publicados" },
-        { v: "5", k: "sectores: banca, cripto, seguros, público y deporte" },
+        { v: "5", k: "sectores en producción" },
       ],
     },
     projects: {
@@ -188,7 +188,7 @@ export const content = {
         { v: "7+", k: "years shipping software" },
         { v: "4+", k: "years at Ibermática · Ayesa" },
         { v: "2", k: "products of my own released" },
-        { v: "5", k: "sectors: banking, crypto, insurance, public, sports" },
+        { v: "5", k: "sectors in production" },
       ],
     },
     projects: {
