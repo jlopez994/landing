@@ -42,13 +42,13 @@ export const content = {
       badge: "abierto a nuevos proyectos",
       title: "Siete años de ingeniería full-stack. Ahora,",
       titleAccent: "a velocidad de IA",
-      lede: "Julián López Hervás. Fintech, blockchain, seguros y sector público: Angular y Spring Boot en Ayesa, proyectos propios de finanzas y deporte con Next.js y NestJS, y apps local-first que calculan eclipses sin tocar un backend. Trabajo con agentes de IA integrados en el flujo diario, del diseño al despliegue.",
+      lede: "Julián López Hervás. Fintech, blockchain, seguros y sector público: Angular y Spring Boot en Ayesa, proyectos propios de finanzas y deporte con Next.js y NestJS, y apps local-first que funcionan sin backend. Trabajo con agentes de IA integrados en el flujo diario, del diseño al despliegue.",
       cta: "ver proyectos →",
       stats: [
         { v: "7+", k: "años desarrollando" },
         { v: "4+", k: "años en Ibermática · Ayesa" },
         { v: "2", k: "productos propios publicados" },
-        { v: "100%", k: "cómputo local en eclipsum" },
+        { v: "5", k: "sectores: banca, cripto, seguros, público y deporte" },
       ],
     },
     projects: {
@@ -182,13 +182,13 @@ export const content = {
       badge: "open to new projects",
       title: "Seven years of full-stack engineering. Now,",
       titleAccent: "at AI speed",
-      lede: "Julián López Hervás. Fintech, blockchain, insurance and public sector: Angular and Spring Boot at Ayesa, my own finance and sports projects in Next.js and NestJS, and local-first apps that compute solar eclipses without touching a backend. I work with AI agents wired into my daily flow, from design to deployment.",
+      lede: "Julián López Hervás. Fintech, blockchain, insurance and public sector: Angular and Spring Boot at Ayesa, my own finance and sports projects in Next.js and NestJS, and local-first apps that run with no backend at all. I work with AI agents wired into my daily flow, from design to deployment.",
       cta: "see projects →",
       stats: [
         { v: "7+", k: "years shipping software" },
         { v: "4+", k: "years at Ibermática · Ayesa" },
         { v: "2", k: "products of my own released" },
-        { v: "100%", k: "on-device compute in eclipsum" },
+        { v: "5", k: "sectors: banking, crypto, insurance, public, sports" },
       ],
     },
     projects: {
