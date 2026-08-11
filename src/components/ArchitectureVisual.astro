@@ -1,0 +1,126 @@
+---
+interface Props {
+  layers: readonly string[];
+}
+
+const { layers } = Astro.props;
+
+// One band per architecture layer, stacked with a connector in between
+const BAND_H = 56;
+const GAP = 40;
+const STEP = BAND_H + GAP;
+const HEIGHT = layers.length * BAND_H + (layers.length - 1) * GAP;
+const NODES = [78, 128, 178];
+---
+
+<aside class="viz" aria-hidden="true">
+  <svg viewBox={`0 0 240 ${HEIGHT}`} fill="none" role="presentation">
+    {
+      layers.map((label, i) => {
+        const y = i * STEP;
+        return (
+          <>
+            {i > 0 && (
+              <line
+                class="link"
+                data-link={i}
+                x1="128"
+                y1={y - GAP}
+                x2="128"
+                y2={y}
+                stroke="currentColor"
+              />
+            )}
+            <g class="band" data-band={i}>
+              <rect x="38" y={y} width="192" height={BAND_H} rx="10" />
+              {NODES.map((cx) => <circle cx={cx} cy={y + BAND_H / 2} r="5" />)}
+              <text x="26" y={y + BAND_H / 2 + 3} text-anchor="end">
+                {label}
+              </text>
+            </g>
+          </>
+        );
+      })
+    }
+  </svg>
+</aside>
+
+<style>
+  .viz {
+    position: sticky;
+    top: 8rem;
+    display: none;
+    color: var(--color-line);
+  }
+
+  /* Only where the side rail already shows — below that the column collapses */
+  @media (min-width: 80rem) {
+    .viz {
+      display: block;
+    }
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .band rect {
+    fill: var(--color-card);
+    stroke: var(--color-line);
+    stroke-width: 1;
+  }
+
+  .band circle {
+    fill: var(--color-line);
+  }
+
+  .band text {
+    fill: var(--color-dim);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Idle: drawn but dim. Active bands light up as you scroll down */
+  .band {
+    opacity: 0.28;
+    transition: opacity 700ms var(--ease-out-expo);
+  }
+
+  .band.on {
+    opacity: 1;
+  }
+
+  .band.on rect {
+    stroke: var(--color-line-hover);
+  }
+
+  .band.on circle {
+    fill: var(--color-accent);
+  }
+
+  .band.on text {
+    fill: var(--color-accent);
+  }
+
+  .link {
+    stroke-width: 1;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    transition: stroke-dashoffset 700ms var(--ease-out-expo);
+  }
+
+  .link.on {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .band,
+    .link {
+      transition: none;
+    }
+  }
+</style>
