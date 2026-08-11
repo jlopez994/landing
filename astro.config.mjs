@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jlopezdev.web.app',
+  site: 'https://jlh.app',
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
