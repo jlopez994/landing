@@ -53,7 +53,7 @@ export const content = {
     },
     projects: {
       heading: "Proyectos",
-      meta: "cliente y personales",
+      meta: "últimos proyectos",
       // Newest first
       items: [
         {
@@ -64,6 +64,16 @@ export const content = {
           body: "App Android para el eclipse total del 12 de agosto de 2026 sobre España. Calcula contactos C1–C4, obscuración y duración de la totalidad para cualquier coordenada, 100 % en el dispositivo con astronomy-engine. Mapa de la banda de totalidad, alertas locales exactas por contacto, nubosidad cacheada offline y un modo eclipse a pantalla completa que avisa de cuándo ponerse y quitarse las gafas.",
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
+          arch: {
+            label: "Cálculo en el dispositivo",
+            nodes: [
+              { t: "app Expo", k: "react native" },
+              { t: "efemérides C1–C4", k: "astronomy-engine" },
+              { t: "banda de totalidad", k: "leaflet" },
+              { t: "nubosidad cacheada", k: "offline" },
+              { t: "alertas por contacto", k: "sin backend" },
+            ],
+          },
         },
         {
           year: "2026",
@@ -73,6 +83,16 @@ export const content = {
           body: "Asistente que nunca envía tu audio a ningún sitio. Wake word «Rufus» entrenada con openWakeWord combinando voces sintéticas en español y grabaciones reales, exportada a ONNX y ejecutándose entera en el edge. El pipeline de entrenamiento es un notebook de Colab reproducible.",
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
+          arch: {
+            label: "Pipeline de wake word",
+            nodes: [
+              { t: "voces sintéticas + reales", k: "dataset" },
+              { t: "entrenamiento", k: "openWakeWord" },
+              { t: "exportación del modelo", k: "onnx" },
+              { t: "detección «Rufus»", k: "en el edge" },
+              { t: "respuesta de voz", k: "piper tts" },
+            ],
+          },
         },
         {
           year: "2024 — hoy",
@@ -82,6 +102,16 @@ export const content = {
           body: "Aplicación para la Universidad del País Vasco (EHU) que gestiona los expedientes de evaluación del profesorado. Frontend en Angular y backend en Java con Spring Boot, desplegado sobre Kubernetes.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Helm", "SonarQube"],
           href: null,
+          arch: {
+            label: "Expedientes docentes",
+            nodes: [
+              { t: "profesorado EHU", k: "frontend angular" },
+              { t: "api de expedientes", k: "spring boot" },
+              { t: "evaluación y estados", k: "postgresql" },
+              { t: "despliegue", k: "kubernetes · helm" },
+              { t: "calidad continua", k: "sonarqube" },
+            ],
+          },
         },
         {
           year: "2024 — hoy",
@@ -91,6 +121,16 @@ export const content = {
           body: "Panel de gestión para una mutua colaboradora con la Seguridad Social, con áreas y permisos diferenciados para empresas, asesorías y usuarios. Angular en el frontend, Java con Spring Boot en el backend y despliegue sobre Kubernetes.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Grafana"],
           href: null,
+          arch: {
+            label: "Panel multi-perfil",
+            nodes: [
+              { t: "empresas · asesorías · usuarios", k: "3 perfiles" },
+              { t: "panel de gestión", k: "angular" },
+              { t: "permisos por área", k: "spring boot" },
+              { t: "datos de la mutua", k: "postgresql" },
+              { t: "operación", k: "kubernetes · grafana" },
+            ],
+          },
         },
       ],
     },
@@ -195,7 +235,7 @@ export const content = {
     },
     projects: {
       heading: "Work",
-      meta: "client & personal",
+      meta: "latest projects",
       // Newest first
       items: [
         {
@@ -206,6 +246,16 @@ export const content = {
           body: "Android app for the total eclipse of August 12, 2026 over Spain. It computes C1–C4 contacts, obscuration and totality duration for any coordinate, 100% on-device with astronomy-engine. Path-of-totality map, exact local alerts per contact, cloud cover cached offline, and a full-screen eclipse mode that tells you when to put your glasses on and take them off.",
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
+          arch: {
+            label: "On-device computation",
+            nodes: [
+              { t: "Expo app", k: "react native" },
+              { t: "C1–C4 ephemerides", k: "astronomy-engine" },
+              { t: "path of totality", k: "leaflet" },
+              { t: "cached cloud cover", k: "offline" },
+              { t: "per-contact alerts", k: "no backend" },
+            ],
+          },
         },
         {
           year: "2026",
@@ -215,6 +265,16 @@ export const content = {
           body: "An assistant that never sends your audio anywhere. The “Rufus” wake word is trained with openWakeWord, mixing Spanish synthetic voices with real recordings, exported to ONNX and running entirely on the edge. The training pipeline is a reproducible Colab notebook.",
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
+          arch: {
+            label: "Wake word pipeline",
+            nodes: [
+              { t: "synthetic + real voices", k: "dataset" },
+              { t: "training", k: "openWakeWord" },
+              { t: "model export", k: "onnx" },
+              { t: "“Rufus” detection", k: "on the edge" },
+              { t: "voice response", k: "piper tts" },
+            ],
+          },
         },
         {
           year: "2024 — now",
@@ -224,6 +284,16 @@ export const content = {
           body: "Application for the University of the Basque Country (EHU) that manages faculty evaluation case files. Angular on the frontend, Java with Spring Boot on the backend, deployed on Kubernetes.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Helm", "SonarQube"],
           href: null,
+          arch: {
+            label: "Faculty case files",
+            nodes: [
+              { t: "EHU faculty", k: "angular frontend" },
+              { t: "case file api", k: "spring boot" },
+              { t: "evaluation states", k: "postgresql" },
+              { t: "deployment", k: "kubernetes · helm" },
+              { t: "continuous quality", k: "sonarqube" },
+            ],
+          },
         },
         {
           year: "2024 — now",
@@ -233,6 +303,16 @@ export const content = {
           body: "Management panel for a Spanish occupational insurance mutual, with separate areas and permissions for companies, advisory firms and individual users. Angular on the frontend, Java with Spring Boot on the backend and Kubernetes deployments.",
           tags: ["Angular", "Java", "Spring Boot", "PostgreSQL", "Kubernetes", "Grafana"],
           href: null,
+          arch: {
+            label: "Multi-role panel",
+            nodes: [
+              { t: "companies · advisors · users", k: "3 roles" },
+              { t: "management panel", k: "angular" },
+              { t: "per-area permissions", k: "spring boot" },
+              { t: "mutual's data", k: "postgresql" },
+              { t: "operations", k: "kubernetes · grafana" },
+            ],
+          },
         },
       ],
     },

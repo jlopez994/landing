@@ -16,33 +16,65 @@ const { t } = Astro.props;
     <span class="meta">{t.meta}</span>
   </div>
 
-  <div class="cards">
-    {
-      t.items.map((p, i) => {
-        // Client work has no public repo, so it renders as a plain card
-        const Tag = p.href ? "a" : "article";
-        const linkProps = p.href
-          ? { href: p.href, target: "_blank", rel: "noopener" }
-          : {};
-        return (
-          <Tag class:list={["card", "reveal", { linked: p.href }]} style={`--i:${i % 3}`} {...linkProps}>
-            <div class="card-meta">
+  <div class="work-grid">
+    <!-- Sticky panel: the architecture of whichever project is being read -->
+    <aside class="panel" aria-hidden="true">
+      <div class="panel-frame">
+        <div class="panel-grid"></div>
+        {
+          t.items.map((p, i) => (
+            <div class="layer" data-layer>
+              <div class="layer-head">
+                <span>{p.arch.label}</span>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <ul class="nodes">
+                {p.arch.nodes.map((n) => (
+                  <li class="node" data-node>
+                    <span class="node-box">
+                      <span class="node-dot" />
+                      <span class="node-t">{n.t}</span>
+                      <span class="node-k">{n.k}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </aside>
+
+    <div class="steps">
+      {
+        t.items.map((p, i) => (
+          <article class="step" data-step>
+            <div class="step-meta">
               <span>
                 {String(i + 1).padStart(2, "0")} · {p.year} · {p.scope}
               </span>
               <span class="metric">{p.metric}</span>
             </div>
-            <h3>{p.title}</h3>
+            <h3>
+              {/* Client work has no public repo, so only personal projects link out */}
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener">
+                  {p.title}
+                </a>
+              ) : (
+                p.title
+              )}
+            </h3>
             <p>{p.body}</p>
             <div class="tags">
               {p.tags.map((tag) => (
                 <span class="chip">{tag}</span>
               ))}
             </div>
-          </Tag>
-        );
-      })
-    }
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
@@ -54,37 +86,152 @@ const { t } = Astro.props;
     padding: var(--space-section) var(--space-gutter);
   }
 
-  .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
   }
 
-  .card {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .panel {
+    position: sticky;
+    top: 4rem;
+    height: clamp(15.5rem, 40vh, 21rem);
+    z-index: 5;
+  }
+
+  .panel-frame {
+    position: relative;
+    height: 100%;
     background: var(--color-card);
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-card);
-    padding: clamp(1.5rem, 3vw, 2.1rem);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .panel-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    background-image:
+      linear-gradient(#14181c 1px, transparent 1px),
+      linear-gradient(90deg, #14181c 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.2rem, 2.6vw, 1.9rem);
+    opacity: 0;
+    transition: opacity 700ms var(--ease-out-expo);
+  }
+
+  /* No-JS / pre-paint fallback: the first project's diagram is the visible one */
+  .layer:first-of-type {
+    opacity: 1;
+  }
+
+  .layer-head {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+
+  .nodes {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .node {
     transition:
-      border-color 600ms var(--ease-out-expo),
-      transform 600ms var(--ease-out-expo),
-      background 600ms var(--ease-out-expo);
+      opacity 600ms var(--ease-out-expo),
+      transform 600ms var(--ease-out-expo);
   }
 
-  .card:hover {
-    border-color: var(--color-line-hover);
-    background: var(--color-card-hover);
+  /* Connector stub between consecutive nodes */
+  .node:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 0.6rem;
+    margin-left: 1.35rem;
+    background: var(--color-line);
   }
 
-  /* Only cards that go somewhere lift on hover */
-  .card.linked:hover {
-    transform: translateY(-3px);
+  .node-box {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: var(--color-chip);
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    padding: 0.45rem 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-soft);
   }
 
-  .card-meta {
+  .node-dot {
+    flex: 0 0 auto;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .node-t {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .node-k {
+    margin-left: auto;
+    color: var(--color-dim);
+    white-space: nowrap;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    min-height: min(74vh, 34rem);
+    padding: 2.5rem 0 2.5rem 1.5rem;
+    border-left: 1px solid var(--color-line);
+    transition:
+      opacity 700ms var(--ease-out-expo),
+      border-color 700ms var(--ease-out-expo);
+  }
+
+  .step.dim {
+    opacity: 0.4;
+  }
+
+  .step.on {
+    border-left-color: var(--color-accent);
+  }
+
+  .step-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 1rem;
@@ -105,11 +252,19 @@ const { t } = Astro.props;
 
   h3 {
     font-size: var(--text-card-title);
-    max-width: 34rem;
+    max-width: 30rem;
   }
 
-  .card p {
-    max-width: 42rem;
+  h3 a {
+    transition: color var(--duration-normal) var(--ease-out-expo);
+  }
+
+  h3 a:hover {
+    color: var(--color-accent);
+  }
+
+  .step p {
+    max-width: 34rem;
     font-size: 1rem;
     line-height: 1.68;
     color: var(--color-mid);
@@ -121,4 +276,93 @@ const { t } = Astro.props;
     gap: 0.45rem;
     margin-top: 0.2rem;
   }
+
+  @media (min-width: 56.25rem) {
+    .work-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    /* Text leads on the left, the diagram tracks it on the right */
+    .steps {
+      order: 1;
+    }
+
+    .panel {
+      order: 2;
+      top: 5.5rem;
+      height: min(62vh, 27rem);
+    }
+
+    /* Diagram reads as a column, not a banner — the text keeps the wider half */
+    .panel-frame {
+      max-width: 25rem;
+      margin-left: auto;
+    }
+
+    .node-box {
+      padding: 0.6rem 0.8rem;
+    }
+
+    .node:not(:last-child)::after {
+      height: 0.85rem;
+    }
+  }
 </style>
+
+<script>
+  const steps = [...document.querySelectorAll<HTMLElement>("[data-step]")];
+  const layers = [...document.querySelectorAll<HTMLElement>("[data-layer]")];
+
+  if (steps.length > 0 && steps.length === layers.length) {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const nodesPerLayer = layers.map((l) => [...l.querySelectorAll<HTMLElement>("[data-node]")]);
+
+    // The step whose centre sits closest to this line is the one being read
+    const FOCUS_RATIO = 0.46;
+    let frame = 0;
+
+    const paint = () => {
+      frame = 0;
+      const focus = window.innerHeight * FOCUS_RATIO;
+      let active = 0;
+      let progress = 0;
+      let closest = Infinity;
+
+      steps.forEach((step, i) => {
+        const box = step.getBoundingClientRect();
+        const distance = Math.abs(box.top + box.height / 2 - focus);
+        if (distance >= closest) return;
+        closest = distance;
+        active = i;
+        progress = Math.min(1, Math.max(0, (focus - box.top) / box.height));
+      });
+
+      steps.forEach((step, i) => {
+        step.classList.toggle("on", i === active);
+        step.classList.toggle("dim", i !== active);
+      });
+      layers.forEach((layer, i) => {
+        layer.style.opacity = i === active ? "1" : "0";
+      });
+
+      // Nodes of the active diagram appear as you read through its step
+      const nodes = nodesPerLayer[active];
+      const shown = reduced
+        ? nodes.length
+        : Math.max(1, Math.ceil(progress * (nodes.length + 0.4)));
+      nodes.forEach((node, i) => {
+        const on = i < shown;
+        node.style.opacity = on ? "1" : "0.16";
+        node.style.transform = on ? "none" : "translateY(12px)";
+      });
+    };
+
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    paint();
+  }
+</script>
