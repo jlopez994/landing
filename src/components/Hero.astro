@@ -40,7 +40,9 @@ const { t } = Astro.props;
 <style>
   .hero {
     position: relative;
-    min-height: calc(100dvh - 61px);
+    /* Capped on phones: a tall screen would otherwise centre the copy into a
+       band of dead space above and below it */
+    min-height: min(calc(100dvh - 61px), 44rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,5 +132,12 @@ const { t } = Astro.props;
     font-size: var(--text-mono-sm);
     color: var(--color-dim);
     line-height: 1.4;
+  }
+
+  /* Wide screens are short enough that the full-height opening still fills */
+  @media (min-width: 48rem) {
+    .hero {
+      min-height: calc(100dvh - 61px);
+    }
   }
 </style>
