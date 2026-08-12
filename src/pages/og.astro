@@ -1,5 +1,7 @@
 ---
-// Source for public/og.png. Open at /og, screenshot the 1200x630 viewport.
+// Source for public/og.png. Open at /og and screenshot the 1200x630 card.
+// It renders with the same self-hosted webfonts as the site, so the social
+// preview and the page it previews cannot drift apart typographically.
 import "../styles/tokens.css";
 ---
 
@@ -7,12 +9,8 @@ import "../styles/tokens.css";
   <head>
     <meta charset="UTF-8" />
     <title>OG card source</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <!-- A build artefact rather than a page: keep it out of the index -->
+    <meta name="robots" content="noindex, nofollow" />
   </head>
   <body>
     <div class="card">
