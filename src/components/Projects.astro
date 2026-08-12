@@ -237,13 +237,18 @@ const { t } = Astro.props;
     flex-direction: column;
   }
 
-  /* The step is the scroll band the walkthrough is paced against; it is much
-     taller than its copy, which is what centres the text as you scroll. */
+  /*
+   * The step is the scroll band the walkthrough is paced against. Its height
+   * comes from the copy plus a fixed gap rather than from a fixed band, so the
+   * space between projects reads the same whatever the copy length; the
+   * min-height is only a floor, so a short project still gets enough scroll
+   * distance to walk through its diagram.
+   */
   .step {
     display: flex;
     align-items: center;
-    min-height: min(52vh, 22rem);
-    padding: 1.8rem 0;
+    min-height: min(46vh, 19rem);
+    padding-block: 1.8rem;
   }
 
   /* The rule marks the copy, so it is the copy's height. Hanging it off the
@@ -330,10 +335,11 @@ const { t } = Astro.props;
       order: 1;
     }
 
+    /* Sized to sit level with a step's copy rather than towering over it */
     .panel {
       order: 2;
       top: 5.5rem;
-      height: min(62vh, 27rem);
+      height: min(54vh, 22.5rem);
     }
 
     /* Diagram reads as a column, not a banner — the text keeps the wider half */
@@ -343,8 +349,8 @@ const { t } = Astro.props;
     }
 
     .steps .step {
-      min-height: min(74vh, 34rem);
-      padding: 2.5rem 0;
+      min-height: min(52vh, 22rem);
+      padding-block: clamp(2rem, 5vh, 3.2rem);
     }
 
     .steps .step-body {
