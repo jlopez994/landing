@@ -2,6 +2,7 @@ export const languages = ["es", "en"] as const;
 export type Lang = (typeof languages)[number];
 export const defaultLang: Lang = "es";
 
+export const NAME = "Julián López Hervás";
 export const EMAIL = "julianlopezhervas@gmail.com";
 
 export const SOCIAL = [
@@ -13,12 +14,17 @@ export const SOCIAL = [
 /** Href for a locale, given Astro's prefixDefaultLocale: false routing. */
 export const localeHref = (lang: Lang) => (lang === defaultLang ? "/" : `/${lang}/`);
 
-export const content = {
+/** OpenGraph locale tags, kept beside the routing they describe. */
+export const OG_LOCALE: Record<Lang, string> = { es: "es_ES", en: "en_US" };
+
+const locales = {
   es: {
     meta: {
       title: "Julián López Hervás — Full-Stack Senior",
       description:
         "Ingeniero full-stack senior en Toledo/Madrid. Siete años en fintech y blockchain con Angular y Spring Boot. Proyectos propios de finanzas y deporte con Next.js y NestJS, además de apps local-first y ML en el edge.",
+      jobTitle: "Ingeniero de software full-stack senior",
+      ogAlt: "Julián López Hervás — Ingeniero full-stack senior",
     },
     nav: {
       rail: [
@@ -37,6 +43,7 @@ export const content = {
       railLabel: "Progreso de sección",
       navLabel: "Navegación principal",
       langLabel: "Cambiar idioma",
+      skip: "Saltar al contenido",
     },
     hero: {
       badge: "abierto a nuevos proyectos",
@@ -201,6 +208,8 @@ export const content = {
       title: "Julián López Hervás — Senior Full-Stack Engineer",
       description:
         "Senior full-stack engineer near Madrid, Spain. Seven years in fintech and blockchain with Angular and Spring Boot. Personal finance and sports projects in Next.js and NestJS, plus local-first apps and edge ML.",
+      jobTitle: "Senior full-stack software engineer",
+      ogAlt: "Julián López Hervás — Senior full-stack engineer",
     },
     nav: {
       rail: [
@@ -219,6 +228,7 @@ export const content = {
       railLabel: "Section progress",
       navLabel: "Main navigation",
       langLabel: "Change language",
+      skip: "Skip to content",
     },
     hero: {
       badge: "open to new projects",
@@ -377,6 +387,18 @@ export const content = {
       location: "Toledo · Madrid · UTC+2",
     },
   },
-} as const;
+};
 
-export type Content = (typeof content)[Lang];
+/**
+ * Spanish is the reference shape — deliberately not `as const`, so the literal
+ * strings widen and every locale is described by one structural type.
+ */
+export type Content = (typeof locales)["es"];
+
+/**
+ * The annotation *is* the parity check. A locale missing a key, or with a key
+ * of the wrong shape, fails here rather than in whichever component happened to
+ * read it; and widening `languages` fails here too, until the translation for
+ * the new locale exists.
+ */
+export const content: Record<Lang, Content> = locales;
