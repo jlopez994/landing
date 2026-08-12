@@ -19,7 +19,7 @@ const { t } = Astro.props;
   <div class="work-grid">
     <!-- Sticky panel: the architecture of whichever project is being read -->
     <aside class="panel" aria-hidden="true">
-      <div class="panel-frame">
+      <div class="panel-frame" data-frame>
         <div class="panel-grid"></div>
         {
           t.items.map((p, i) => (
@@ -124,8 +124,13 @@ const { t } = Astro.props;
     transition: opacity 700ms var(--ease-out-expo);
   }
 
-  /* No-JS / pre-paint fallback: the first project's diagram is the visible one */
-  .layer:first-of-type {
+  .layer.on {
+    opacity: 1;
+  }
+
+  /* Without JS the walkthrough never runs, so the first diagram is the one on
+     show. The first paint adds `.live`, taking that fallback back out. */
+  .panel-frame:not(.live) .layer:first-of-type {
     opacity: 1;
   }
 
@@ -183,6 +188,14 @@ const { t } = Astro.props;
     background: var(--color-card-hover);
   }
 
+  /* Nothing is scrubbing here, so every node reads at full strength */
+  @media (prefers-reduced-motion: reduce) {
+    .node.off {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .node-box {
     display: flex;
     align-items: center;
@@ -230,17 +243,23 @@ const { t } = Astro.props;
     min-height: min(52vh, 22rem);
     padding: 1.8rem 0 1.8rem 1.15rem;
     border-left: 1px solid var(--color-line);
-    transition:
-      opacity 700ms var(--ease-out-expo),
-      border-color 700ms var(--ease-out-expo);
+    transition: border-color 700ms var(--ease-out-expo);
   }
 
-  .step.dim {
-    opacity: 0.4;
-  }
-
+  /* Focus is carried by the accent rule and the title, not by fading the copy
+     out: the step you are not on is still a step someone may be reading, and
+     the 40% wash this replaces put the text below the AA contrast floor. */
   .step.on {
     border-left-color: var(--color-accent);
+  }
+
+  .step h3 {
+    color: var(--color-mid);
+    transition: color 700ms var(--ease-out-expo);
+  }
+
+  .step.on h3 {
+    color: var(--color-text);
   }
 
   .step-meta {
@@ -331,62 +350,98 @@ const { t } = Astro.props;
 </style>
 
 <script>
+  /**
+   * Scrollytelling: the step closest to the reading line owns the sticky
+   * diagram, and its nodes appear as that step is read through.
+   *
+   * The scroll path reads nothing from the DOM. Step extents are measured once
+   * per layout into document-space bands, so a scroll frame is pure
+   * arithmetic — no forced synchronous layout — and the DOM is written to only
+   * when the derived state actually changes, which for most frames is never.
+   */
   const steps = [...document.querySelectorAll<HTMLElement>("[data-step]")];
   const layers = [...document.querySelectorAll<HTMLElement>("[data-layer]")];
+  const frame = document.querySelector<HTMLElement>("[data-frame]");
 
-  if (steps.length > 0 && steps.length === layers.length) {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const nodesPerLayer = layers.map((l) => [...l.querySelectorAll<HTMLElement>("[data-node]")]);
+  if (frame && steps.length > 0 && steps.length === layers.length) {
+    const nodesPerLayer = layers.map((layer) => [
+      ...layer.querySelectorAll<HTMLElement>("[data-node]"),
+    ]);
 
     // The step whose centre sits closest to this line is the one being read
     const FOCUS_RATIO = 0.46;
-    let frame = 0;
+
+    /** Step extents in document space, refreshed only when the layout moves. */
+    let bands: { top: number; height: number }[] = [];
+    let paintedStep = -1;
+    let paintedShown = -1;
+    let rafId = 0;
+
+    const measure = () => {
+      const scrolled = window.scrollY;
+      bands = steps.map((step) => {
+        const box = step.getBoundingClientRect();
+        return { top: box.top + scrolled, height: box.height };
+      });
+    };
 
     const paint = () => {
-      frame = 0;
-      const focus = window.innerHeight * FOCUS_RATIO;
-      let active = 0;
-      let progress = 0;
-      let closest = Infinity;
+      rafId = 0;
+      if (bands.length === 0) return;
 
-      steps.forEach((step, i) => {
-        const box = step.getBoundingClientRect();
-        const distance = Math.abs(box.top + box.height / 2 - focus);
+      const focus = window.scrollY + window.innerHeight * FOCUS_RATIO;
+
+      let active = 0;
+      let closest = Infinity;
+      bands.forEach((band, i) => {
+        const distance = Math.abs(band.top + band.height / 2 - focus);
         if (distance >= closest) return;
         closest = distance;
         active = i;
-        progress = Math.min(1, Math.max(0, (focus - box.top) / box.height));
       });
 
-      steps.forEach((step, i) => {
-        step.classList.toggle("on", i === active);
-        step.classList.toggle("dim", i !== active);
-      });
-      layers.forEach((layer, i) => {
-        layer.style.opacity = i === active ? "1" : "0";
-      });
-
-      // Nodes of the active diagram appear as you read through its step
+      const band = bands[active];
+      const progress = Math.min(1, Math.max(0, (focus - band.top) / band.height));
       const nodes = nodesPerLayer[active];
-      const shown = reduced
-        ? nodes.length
-        : Math.max(1, Math.ceil(progress * (nodes.length + 0.4)));
-      nodes.forEach((node, i) => {
-        node.classList.toggle("on", i < shown);
-        node.classList.toggle("off", i >= shown);
-        node.classList.toggle("lead", i === shown - 1);
-      });
+      const shown = Math.max(1, Math.ceil(progress * (nodes.length + 0.4)));
+
+      if (active !== paintedStep) {
+        steps.forEach((step, i) => step.classList.toggle("on", i === active));
+        layers.forEach((layer, i) => layer.classList.toggle("on", i === active));
+        frame.classList.add("live");
+        paintedStep = active;
+        paintedShown = -1;
+      }
+
+      if (shown !== paintedShown) {
+        nodes.forEach((node, i) => {
+          node.classList.toggle("on", i < shown);
+          node.classList.toggle("off", i >= shown);
+          node.classList.toggle("lead", i === shown - 1);
+        });
+        paintedShown = shown;
+      }
     };
 
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(paint);
+      if (!rafId) rafId = requestAnimationFrame(paint);
     };
 
-    window.addEventListener("resize", schedule);
+    const remeasure = () => {
+      measure();
+      schedule();
+    };
+
+    // Every reflow that moves the steps — a resize, an orientation change, the
+    // webfont swapping in — also changes the document height, so one observer
+    // on the body catches all of them. Its first delivery is what measures the
+    // page initially: it arrives after layout, where reading geometry is free,
+    // whereas measuring eagerly here would force a synchronous one.
+    new ResizeObserver(remeasure).observe(document.body);
 
     // Scroll work only runs while the walkthrough is on screen
     const section = steps[0].closest("section")!;
-    const io = new IntersectionObserver((entries) => {
+    new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
           window.addEventListener("scroll", schedule, { passive: true });
@@ -395,10 +450,6 @@ const { t } = Astro.props;
           window.removeEventListener("scroll", schedule);
         }
       }
-    });
-    io.observe(section);
-
-    // Through rAF, so the first read lands after layout instead of forcing it
-    schedule();
+    }).observe(section);
   }
 </script>

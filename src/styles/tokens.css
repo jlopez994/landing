@@ -54,10 +54,13 @@
   --color-line-hover: #2e5e48;
   --color-line-accent: #26372f;
 
+  /* Contrast against --color-bg, all clear of the 4.5:1 AA floor for body
+     text: text 15.8, text-soft 10.5, mid 6.6, dim 4.7. `dim` carries the
+     monospace labels, so it is the one that sets the floor. */
   --color-text: #eaecef;
   --color-text-soft: #c5cad0;
   --color-mid: #8b9299;
-  --color-dim: #5f666e;
+  --color-dim: #767d85;
 
   --color-accent: #7cf1b4;
   --color-accent-ink: #07130d;

@@ -18,8 +18,8 @@ const { t } = Astro.props;
 
   <ol class="roles">
     {
-      t.roles.map((r, i) => (
-        <li class="role reveal" style={`--i:${i % 3}`}>
+      t.roles.map((r) => (
+        <li class="role reveal">
           <span class="years">{r.years}</span>
           <span class="title">
             {r.role} <span class="at">@ {r.company}</span>
@@ -52,6 +52,16 @@ const { t } = Astro.props;
 
   .role:hover {
     border-bottom-color: var(--color-line-hover);
+  }
+
+  /* Reveal stagger, restarting every third row so a long list never ends up
+     waiting on a delay measured in seconds */
+  .role:nth-child(3n + 2) {
+    --i: 1;
+  }
+
+  .role:nth-child(3n) {
+    --i: 2;
   }
 
   .years {

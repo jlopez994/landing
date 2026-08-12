@@ -18,8 +18,8 @@ const { t } = Astro.props;
 
   <div class="grid">
     {
-      t.groups.map((g, i) => (
-        <article class="card reveal" style={`--i:${i % 3}`}>
+      t.groups.map((g) => (
+        <article class="card reveal">
           <h3>{g.label}</h3>
           <ul>
             {g.items.map((item) => (
@@ -33,10 +33,27 @@ const { t } = Astro.props;
 </section>
 
 <style>
+  /*
+   * Column counts are pinned rather than left to `auto-fit`, because eight
+   * groups only tile cleanly at one, two or four across. An auto-fit track
+   * settles on three at desktop widths and leaves the last row half empty.
+   */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  @media (min-width: 34rem) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .card {
@@ -49,6 +66,26 @@ const { t } = Astro.props;
 
   .card:hover {
     border-color: var(--color-line-hover);
+  }
+
+  /* The AI group opens the list and carries the page's argument, so it is the
+     one card given weight, instead of eight cards sharing the same emphasis */
+  .card:first-child {
+    border-color: var(--color-line-accent);
+    background: linear-gradient(var(--color-accent-wash), transparent) var(--color-card);
+  }
+
+  /* Reveal stagger across a row, wrapping with the widest column count */
+  .card:nth-child(4n + 2) {
+    --i: 1;
+  }
+
+  .card:nth-child(4n + 3) {
+    --i: 2;
+  }
+
+  .card:nth-child(4n) {
+    --i: 3;
   }
 
   h3 {

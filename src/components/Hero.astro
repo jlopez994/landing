@@ -13,24 +13,26 @@ const { t } = Astro.props;
     <span class="dot" aria-hidden="true"></span>{t.badge}
   </p>
 
-  <h1 class="rise" style="--i:1">
+  <h1 class="rise">
     {t.title}{" "}
     <span class="accent">{t.titleAccent}</span>.
   </h1>
 
-  <p class="lede rise" style="--i:2">{t.lede}</p>
+  <p class="lede rise">{t.lede}</p>
 
-  <div class="actions rise" style="--i:3">
+  <div class="actions rise">
     <a href="#work" class="btn btn-primary">{t.cta}</a>
     <a href={`mailto:${EMAIL}`} class="btn btn-ghost">{EMAIL}</a>
   </div>
 
-  <dl class="stats rise" style="--i:4">
+  <dl class="stats rise">
     {
       t.stats.map((s) => (
         <div class="stat">
-          <dd>{s.v}</dd>
+          {/* Term before description, as the spec requires; the figure is
+              lifted above its label visually, not structurally. */}
           <dt>{s.k}</dt>
+          <dd>{s.v}</dd>
         </div>
       ))
     }
@@ -49,6 +51,25 @@ const { t } = Astro.props;
     max-width: var(--content-max);
     margin-inline: auto;
     padding: min(3rem, 4vh) var(--space-gutter) min(2.5rem, 4vh);
+  }
+
+  /* Entrance stagger, top to bottom. Declared here instead of as inline
+     `style="--i:n"` so the markup carries no presentation — and so the CSP can
+     drop `style-src 'unsafe-inline'` entirely. */
+  .badge {
+    --i: 0;
+  }
+  h1 {
+    --i: 1;
+  }
+  .lede {
+    --i: 2;
+  }
+  .actions {
+    --i: 3;
+  }
+  .stats {
+    --i: 4;
   }
 
   .badge {
@@ -114,6 +135,10 @@ const { t } = Astro.props;
   }
 
   .stat {
+    display: flex;
+    /* Figure over label, without inverting the dt → dd source order */
+    flex-direction: column-reverse;
+    justify-content: flex-end;
     background: var(--color-card);
     padding: min(1.15rem, 1.9vh) 1.35rem;
   }
