@@ -9,23 +9,23 @@ const { t } = Astro.props;
 ---
 
 <section id="top" class="hero">
-  <p class="badge reveal">
+  <p class="badge rise">
     <span class="dot" aria-hidden="true"></span>{t.badge}
   </p>
 
-  <h1 class="reveal">
+  <h1 class="rise" style="--i:1">
     {t.title}{" "}
     <span class="accent">{t.titleAccent}</span>.
   </h1>
 
-  <p class="lede reveal">{t.lede}</p>
+  <p class="lede rise" style="--i:2">{t.lede}</p>
 
-  <div class="actions reveal">
+  <div class="actions rise" style="--i:3">
     <a href="#work" class="btn btn-primary">{t.cta}</a>
     <a href={`mailto:${EMAIL}`} class="btn btn-ghost">{EMAIL}</a>
   </div>
 
-  <dl class="stats reveal">
+  <dl class="stats rise" style="--i:4">
     {
       t.stats.map((s) => (
         <div class="stat">

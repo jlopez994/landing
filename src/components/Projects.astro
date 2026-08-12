@@ -382,8 +382,23 @@ const { t } = Astro.props;
       if (!frame) frame = requestAnimationFrame(paint);
     };
 
-    window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
-    paint();
+
+    // Scroll work only runs while the walkthrough is on screen
+    const section = steps[0].closest("section")!;
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          window.addEventListener("scroll", schedule, { passive: true });
+          schedule();
+        } else {
+          window.removeEventListener("scroll", schedule);
+        }
+      }
+    });
+    io.observe(section);
+
+    // Through rAF, so the first read lands after layout instead of forcing it
+    schedule();
   }
 </script>

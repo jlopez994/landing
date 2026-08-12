@@ -27,11 +27,19 @@ const nav = t.nav;
       ))
     }
     <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/sora-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <meta property="og:title" content={t.meta.title} />
     <meta property="og:description" content={t.meta.description} />
@@ -160,7 +168,8 @@ const nav = t.nav;
 
         window.addEventListener("scroll", read, { passive: true });
         window.addEventListener("resize", read);
-        read();
+        // Deferred so the initial scrollHeight read never forces a layout
+        requestAnimationFrame(read);
       }
     </script>
   </body>
@@ -174,10 +183,12 @@ const nav = t.nav;
     overflow-x: clip;
   }
 
-  /* Blueprint grid, faded out after the first screen */
+  /* Blueprint grid, faded out after the first screen — bounded so the painted
+     layer stays viewport-sized instead of spanning the whole document */
   .grid-bg {
     position: absolute;
-    inset: 0;
+    inset: 0 0 auto;
+    height: 150vh;
     pointer-events: none;
     background-image:
       linear-gradient(var(--color-grid) 1px, transparent 1px),

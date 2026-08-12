@@ -143,6 +143,22 @@ section[id] {
   color: var(--color-accent);
 }
 
+/*
+ * Above-the-fold entrance. Two rules keep it off the critical path:
+ * it runs without the observer, and it never fades — Chrome only counts an
+ * element as painted once it is opaque, so a fade would push LCP back by its
+ * own duration.
+ */
+.rise {
+  animation: rise 620ms var(--ease-out-expo) calc(var(--i, 0) * 70ms) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(22px);
+  }
+}
+
 /* Scroll reveal — staggered inside lists via --i */
 .reveal {
   opacity: 0;
@@ -166,6 +182,10 @@ section[id] {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .rise {
+    animation: none;
   }
 
   *,
