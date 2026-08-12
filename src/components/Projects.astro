@@ -373,14 +373,14 @@ const { t } = Astro.props;
 
 <script>
   /**
-   * Scrollytelling: a project takes the sticky diagram over the moment its
-   * heading reaches the diagram's own top edge, and its nodes appear as that
-   * project is read through.
+   * Scrollytelling: a project takes the sticky diagram over as its heading
+   * passes the middle of the viewport, and its nodes appear as it is read
+   * through.
    *
-   * Handover is deliberately tied to the panel's sticky offset rather than to
-   * a fraction of the viewport: the two then agree by construction, and the
-   * switch lands where the eye already reads it — when the next heading
-   * arrives beside the panel — at any step height.
+   * Handing over at the panel's top edge instead reads as too late — by then
+   * the outgoing copy has left the screen, so for a moment the diagram belongs
+   * to something no longer visible. Halfway down, both the heading taking over
+   * and the copy it belongs to are on screen together.
    *
    * The scroll path reads nothing from the DOM. The handover positions are
    * measured once per layout, so a scroll frame is pure arithmetic — no forced
@@ -397,6 +397,9 @@ const { t } = Astro.props;
       ...layer.querySelectorAll<HTMLElement>("[data-node]"),
     ]);
 
+    /** Where down the viewport a heading takes the diagram over. */
+    const HANDOVER_RATIO = 0.5;
+
     /** Scroll position at which each project takes over, in document space. */
     let handovers: number[] = [];
     /** Scroll distance each project stays in charge for. */
@@ -407,18 +410,22 @@ const { t } = Astro.props;
 
     const measure = () => {
       const scrolled = window.scrollY;
-      // `top` on a sticky element resolves to its offset, not its drawn
-      // position, which is exactly the line a heading has to reach.
-      const stickyTop = parseFloat(getComputedStyle(panel).top) || 0;
+      const line = window.innerHeight * HANDOVER_RATIO;
 
       handovers = steps.map((step) => {
         const heading = step.querySelector<HTMLElement>(".step-body") ?? step;
-        return heading.getBoundingClientRect().top + scrolled - stickyTop;
+        return heading.getBoundingClientRect().top + scrolled - line;
       });
 
-      const lastStep = steps[steps.length - 1].getBoundingClientRect();
-      const end = lastStep.bottom + scrolled - stickyTop;
-      spans = handovers.map((start, i) => Math.max(1, (handovers[i + 1] ?? end) - start));
+      // The walkthrough ends where the diagram stops being pinned: its foot
+      // meeting the foot of the column it sticks inside. `top` on a sticky
+      // element resolves to its offset rather than its drawn position, which
+      // is what that calculation needs. Deriving the release instead of
+      // assuming it keeps the last project's reveal inside its own window.
+      const stickyTop = parseFloat(getComputedStyle(panel).top) || 0;
+      const track = steps[0].parentElement!.getBoundingClientRect();
+      const release = track.bottom + scrolled - stickyTop - panel.offsetHeight;
+      spans = handovers.map((start, i) => Math.max(1, (handovers[i + 1] ?? release) - start));
     };
 
     const paint = () => {
