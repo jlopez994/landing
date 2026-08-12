@@ -49,27 +49,29 @@ const { t } = Astro.props;
       {
         t.items.map((p, i) => (
           <article class="step" data-step>
-            <div class="step-meta">
-              <span>
-                {String(i + 1).padStart(2, "0")} · {p.year} · {p.scope}
-              </span>
-              <span class="metric">{p.metric}</span>
-            </div>
-            <h3>
-              {/* Client work has no public repo, so only personal projects link out */}
-              {p.href ? (
-                <a href={p.href} target="_blank" rel="noopener">
-                  {p.title}
-                </a>
-              ) : (
-                p.title
-              )}
-            </h3>
-            <p>{p.body}</p>
-            <div class="tags">
-              {p.tags.map((tag) => (
-                <span class="chip">{tag}</span>
-              ))}
+            <div class="step-body">
+              <div class="step-meta">
+                <span>
+                  {String(i + 1).padStart(2, "0")} · {p.year} · {p.scope}
+                </span>
+                <span class="metric">{p.metric}</span>
+              </div>
+              <h3>
+                {/* Client work has no public repo, so only personal projects link out */}
+                {p.href ? (
+                  <a href={p.href} target="_blank" rel="noopener">
+                    {p.title}
+                  </a>
+                ) : (
+                  p.title
+                )}
+              </h3>
+              <p>{p.body}</p>
+              <div class="tags">
+                {p.tags.map((tag) => (
+                  <span class="chip">{tag}</span>
+                ))}
+              </div>
             </div>
           </article>
         ))
@@ -235,13 +237,23 @@ const { t } = Astro.props;
     flex-direction: column;
   }
 
+  /* The step is the scroll band the walkthrough is paced against; it is much
+     taller than its copy, which is what centres the text as you scroll. */
   .step {
+    display: flex;
+    align-items: center;
+    min-height: min(52vh, 22rem);
+    padding: 1.8rem 0;
+  }
+
+  /* The rule marks the copy, so it is the copy's height. Hanging it off the
+     scroll band instead left a 500px line beside 300px of text. */
+  .step-body {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    justify-content: center;
-    min-height: min(52vh, 22rem);
-    padding: 1.8rem 0 1.8rem 1.15rem;
+    padding: 0.65rem 0 0.65rem 1.15rem;
     border-left: 1px solid var(--color-line);
     transition: border-color 700ms var(--ease-out-expo);
   }
@@ -249,7 +261,7 @@ const { t } = Astro.props;
   /* Focus is carried by the accent rule and the title, not by fading the copy
      out: the step you are not on is still a step someone may be reading, and
      the 40% wash this replaces put the text below the AA contrast floor. */
-  .step.on {
+  .step.on .step-body {
     border-left-color: var(--color-accent);
   }
 
@@ -332,7 +344,11 @@ const { t } = Astro.props;
 
     .steps .step {
       min-height: min(74vh, 34rem);
-      padding: 2.5rem 0 2.5rem 1.5rem;
+      padding: 2.5rem 0;
+    }
+
+    .steps .step-body {
+      padding-left: 1.5rem;
     }
 
     .node-box {
