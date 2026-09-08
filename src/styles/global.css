@@ -67,7 +67,7 @@ section[id] {
 
 .section-head .idx {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--text-mono-sm);
   color: var(--color-accent);
 }
 
@@ -91,7 +91,7 @@ section[id] {
 /* Chip: monospace pill used for tags and badges */
 .chip {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--text-mono-sm);
   color: var(--color-text-soft);
   background: var(--color-chip);
   border: 1px solid var(--color-line);
@@ -160,6 +160,15 @@ section[id] {
 .reveal.in {
   opacity: 1;
   transform: none;
+}
+
+/* No script runs in print, Reader mode or with JS off, so nothing may wait
+   on the observer to become visible */
+@media print, (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

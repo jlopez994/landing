@@ -125,7 +125,9 @@ const { t } = Astro.props;
   /* Hairline grid: 1px gaps over the border colour read as dividers */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+    /* Two across on a phone instead of four stacked cards pushing the CTA off
+       the first screen; still four across from tablet up */
+    grid-template-columns: repeat(auto-fit, minmax(min(8.5rem, 100%), 1fr));
     gap: 1px;
     margin-top: min(clamp(2.2rem, 4.5vw, 3.4rem), 4.2vh);
     background: var(--color-line);

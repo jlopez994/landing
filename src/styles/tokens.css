@@ -71,8 +71,10 @@
   --font-body: "Sora", "Sora Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Mono Fallback", ui-monospace, monospace;
 
-  --text-mono-sm: 0.7rem;
-  --text-mono: 0.74rem;
+  /* 12px floor: the mono labels are light grey on near-black, and under 12px
+     they were the least legible thing on the page. */
+  --text-mono-sm: 0.75rem;
+  --text-mono: 0.78rem;
   --text-hero: min(clamp(2.2rem, 5.4vw, 4.6rem), 9vh);
   --text-card-title: clamp(1.3rem, 2.4vw, 1.8rem);
 
@@ -84,6 +86,6 @@
   --radius-btn: 10px;
 
   --duration-normal: 500ms;
-  --duration-slow: 1050ms;
+  --duration-slow: 650ms;
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 }

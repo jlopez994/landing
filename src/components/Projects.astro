@@ -57,14 +57,10 @@ const { t } = Astro.props;
                 <span class="metric">{p.metric}</span>
               </div>
               <h3>
-                {/* Client work has no public repo, so only personal projects link out */}
-                {p.href ? (
-                  <a href={p.href} target="_blank" rel="noopener">
-                    {p.title}
-                  </a>
-                ) : (
-                  p.title
-                )}
+                {/* Client work has no public repo, so only personal projects link out.
+                    Same tab: a new window without warning is what WCAG G200 asks
+                    to avoid, and the reader can still middle-click. */}
+                {p.href ? <a href={p.href}>{p.title}</a> : p.title}
               </h3>
               <p>{p.body}</p>
               <div class="tags">
@@ -88,11 +84,12 @@ const { t } = Astro.props;
     align-items: start;
   }
 
-  /* Stays a strip on phones: the text is what's being read, not the diagram */
+  /* Off on phones: pinned, it held a third of the screen with 11px decorative
+     text while the copy was being read. The step rule and title still track the
+     scroll, so the walkthrough keeps its focus without the diagram. */
   .panel {
+    display: none;
     position: sticky;
-    top: 3.9rem;
-    height: clamp(11rem, 26vh, 13rem);
     z-index: 5;
   }
 
@@ -140,7 +137,7 @@ const { t } = Astro.props;
     display: flex;
     justify-content: space-between;
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-dim);
@@ -207,7 +204,7 @@ const { t } = Astro.props;
     border-radius: 8px;
     padding: 0.3rem 0.5rem;
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     line-height: 1.35;
     color: var(--color-text-soft);
   }
@@ -337,6 +334,7 @@ const { t } = Astro.props;
 
     /* Sized to sit level with a step's copy rather than towering over it */
     .panel {
+      display: block;
       order: 2;
       top: 5.5rem;
       height: min(54vh, 22.5rem);
@@ -361,7 +359,7 @@ const { t } = Astro.props;
       gap: 0.65rem;
       border-radius: 10px;
       padding: 0.6rem 0.8rem;
-      font-size: 0.72rem;
+      font-size: var(--text-mono-sm);
     }
 
     .node:not(:last-child)::after {

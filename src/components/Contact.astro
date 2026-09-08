@@ -19,11 +19,7 @@ const { t } = Astro.props;
       <a href={`mailto:${EMAIL}`} class="btn btn-primary mail">{EMAIL}</a>
       <div class="social">
         {
-          SOCIAL.map((l) => (
-            <a href={l.href} target="_blank" rel="noopener">
-              {l.label}
-            </a>
-          ))
+          SOCIAL.map((l) => <a href={l.href}>{l.label}</a>)
         }
       </div>
     </div>

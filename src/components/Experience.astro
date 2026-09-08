@@ -21,9 +21,10 @@ const { t } = Astro.props;
       t.roles.map((r) => (
         <li class="role reveal">
           <span class="years">{r.years}</span>
-          <span class="title">
+          {/* A heading per role lets screen-reader users jump between jobs */}
+          <h3 class="title">
             {r.role} <span class="at">@ {r.company}</span>
-          </span>
+          </h3>
           <span class="stack">{r.stack}</span>
         </li>
       ))
@@ -73,6 +74,9 @@ const { t } = Astro.props;
   .title {
     font-size: 1.05rem;
     font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    text-wrap: pretty;
   }
 
   .at {

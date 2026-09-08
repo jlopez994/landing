@@ -57,7 +57,7 @@ throttled to Slow 4G and 4× CPU:
 |---|---|
 | LCP | ~0.8 s |
 | CLS | 0.00 |
-| HTML transferred | 11 kB gzip, per locale |
+| HTML transferred | 13 kB gzip, per locale |
 | JavaScript | 1.9 kB uncompressed, inlined, zero dependencies |
 | Requests to first paint | 3 |
 | Lighthouse | 100 accessibility · 100 best practices · 100 SEO |
@@ -108,4 +108,8 @@ Skip link, landmark structure, visible focus rings, and contrast ratios document
 beside the colour tokens — every text token clears 4.5:1 against the background.
 `prefers-reduced-motion: reduce` is honoured in CSS rather than branched on in JS:
 the reveal observer still runs and still applies its class, the transition is simply
-a no-op, and the scroll progress bar is hidden outright.
+a no-op, and the scroll progress bar is hidden outright. Where no script runs at
+all — print, Reader mode, JS disabled — `@media print, (scripting: none)` shows
+every revealed element outright, so nothing waits on an observer that never fires.
+Monospace labels never drop below 12px, every link clears the 24px target size,
+and external links open in the same tab rather than a new one without warning.
