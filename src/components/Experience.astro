@@ -25,7 +25,14 @@ const { t } = Astro.props;
           <h3 class="title">
             {r.role} <span class="at">@ {r.company}</span>
           </h3>
-          <span class="stack">{r.stack}</span>
+          <div class="stack">
+            <p>{r.stack}</p>
+            <ul class="tasks">
+              {r.tasks.map((task) => (
+                <li>{task}</li>
+              ))}
+            </ul>
+          </div>
         </li>
       ))
     }
@@ -84,9 +91,30 @@ const { t } = Astro.props;
   }
 
   .stack {
+    display: grid;
+    gap: 0.5rem;
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--color-mid);
+  }
+
+  .tasks {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .tasks li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .tasks li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
   }
 
   @media (min-width: 48rem) {

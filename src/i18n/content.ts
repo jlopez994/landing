@@ -64,6 +64,7 @@ const locales = {
     projects: {
       heading: "Proyectos",
       meta: "últimos proyectos",
+      roleLabel: "mi papel",
       // Newest first
       items: [
         {
@@ -71,8 +72,16 @@ const locales = {
           scope: "Ayesa",
           metric: "sanidad pública",
           title: "Sistema hospitalario integral — Osakidetza",
-          body: "Sistema de información hospitalario del Servicio Vasco de Salud, en uso diario: admisión, gestión de pacientes, bloque quirúrgico, farmacia y el resto del circuito asistencial en una sola aplicación clínica con años de historia. Evoluciono el módulo de bloque quirúrgico —la solicitud de intervención de un paciente y su seguimiento hasta el quirófano— con nuevas funcionalidades, refactor por módulos e incidencias de producción, sin parar nunca el servicio. Y he automatizado con IA toda la gestión de funcionalidades e incidencias: del ticket al análisis del funcional heredado, el desarrollo y las pruebas, con agentes que trabajan sobre los patrones del proyecto y el equipo revisando lo que generan.",
-          tags: ["Angular", "TypeScript", "Java", "Spring", "agentes de IA"],
+          body: "Sistema de información hospitalario del Servicio Vasco de Salud, en uso diario: admisión, gestión de pacientes, bloque quirúrgico, farmacia y el resto del circuito asistencial en una sola aplicación clínica con años de historia.",
+          role: "Full-stack en el módulo de bloque quirúrgico · equipo de Ayesa",
+          tasks: [
+            "Desarrollo nuevas funcionalidades del bloque quirúrgico en Angular y Spring: registro de intervención y programación por quirófano.",
+            "Migro pantallas del sistema anterior con paridad de datos y de mensajes HL7 frente al original.",
+            "Refactorizo un módulo heredado en módulos compartidos y de enrutado, sin parar el servicio.",
+            "Automatizo con IA la gestión de funcionalidades e incidencias: del ticket al análisis del funcional heredado, el desarrollo y las pruebas.",
+            "Resuelvo incidencias de producción en admisión y hospitalización.",
+          ],
+          tags: ["Angular", "TypeScript", "Java", "Spring", "HL7", "agentes de IA"],
           href: null,
           arch: {
             label: "Circuito asistencial",
@@ -90,7 +99,14 @@ const locales = {
           scope: "proyecto personal",
           metric: "extracción con IA",
           title: "Analizador de facturas — de PDF a datos con IA",
-          body: "Aplicación web autoalojada para dejar de picar facturas a mano. Los recibos llegan en PDF, en foto desde el móvil o directamente del correo, que un lector de Gmail revisa solo cada doce horas; una cola de trabajos los pasa por un LLM que extrae comercio, fecha, importes, líneas y categoría, y quedan listos para consultar, corregir y analizar. Mobile-first, en mi propio servidor y con copia diaria.",
+          body: "Aplicación web autoalojada para dejar de picar facturas a mano: los recibos llegan en PDF, en foto o por correo y salen como datos listos para consultar, corregir y analizar.",
+          role: "En solitario · diseño, desarrollo y despliegue",
+          tasks: [
+            "Diseño el pipeline de extracción: una cola de trabajos pasa cada documento por un LLM y guarda comercio, fecha, importes, líneas y categoría.",
+            "Integro Gmail para recoger las facturas del correo solas cada doce horas.",
+            "Construyo la web mobile-first en React y la API en Fastify, en un monorepo.",
+            "Despliego con Docker Compose en servidor propio, con almacenamiento de objetos y copia diaria.",
+          ],
           tags: ["React", "Fastify", "BullMQ", "PostgreSQL", "Redis", "MinIO", "Claude"],
           href: null,
           arch: {
@@ -109,7 +125,15 @@ const locales = {
           scope: "producto propio · IberStack",
           metric: "escala a cero",
           title: "PxNara — licencias y backend de una suite de pixel art",
-          body: "Suite de creación de pixel art en C++ —modelado 3D, render a píxel y editor— que construyo con Fran Llopis bajo la marca IberStack. Diseñé y llevo todo el plano de control del producto: cuentas y prueba gratuita, licencias y pagos con Stripe, estudios con asientos e invitaciones, sincronización de proyectos con GitHub, el panel del operador y el login seguro desde la app de escritorio. Arquitectura hexagonal que escala a cero: ningún servidor encendido mientras nadie compra, y cada push a main despliega solo.",
+          body: "Suite de creación de pixel art en C++ —modelado 3D, render a píxel y editor— que construyo con Fran Llopis bajo la marca IberStack, para Windows, macOS y Linux.",
+          role: "Cofundador · responsable del backend, el panel y la distribución",
+          tasks: [
+            "Diseño la API con arquitectura hexagonal y el panel web; escalan a cero en Cloud Run: ningún servidor encendido mientras nadie compra.",
+            "Integro Stripe: licencia perpetua, suscripción individual y de estudio por asientos, con el IVA según el país.",
+            "Implemento licencias firmadas que funcionan sin conexión, límite de dispositivos y login desde la app de escritorio con OAuth2 PKCE.",
+            "Conecto la sincronización de proyectos con GitHub, GitLab y Unity Version Control.",
+            "Automatizo CI/CD: cada push a main se despliega tras verificarse, y las releases salen para los tres sistemas con revisión por IA.",
+          ],
           tags: ["TypeScript", "Fastify", "Next.js", "Firebase", "Firestore", "Stripe", "Cloud Run"],
           href: "https://pxnara.iberstack.com",
           arch: {
@@ -128,7 +152,14 @@ const locales = {
           scope: "proyecto personal",
           metric: "sin backend",
           title: "Eclipsum — compañero de eclipses solares",
-          body: "App Android para vivir un eclipse solar, nacida para el total que cruzó España el 12 de agosto de 2026. Calcula los contactos C1–C4, la obscuración y la duración de la totalidad para cualquier coordenada sin servidor: todo en el dispositivo. El mapa muestra la banda de totalidad y el punto más cercano donde verla completa; el modo eclipse avisa de cuándo ponerse y quitarse las gafas, y un catálogo cubre los eclipses de los próximos ocho años. Concebida, diseñada y construida en solitario, de la efeméride al APK.",
+          body: "App Android para vivir un eclipse solar, nacida para el total que cruzó España el 12 de agosto de 2026. Todo se calcula en el dispositivo, sin servidor.",
+          role: "En solitario · de la efeméride al APK",
+          tasks: [
+            "Calculo los contactos C1–C4, la obscuración y la duración de la totalidad para cualquier coordenada.",
+            "Dibujo en el mapa la banda de totalidad y el punto más cercano donde verla completa.",
+            "Programo avisos locales de cuándo ponerse y quitarse las gafas durante el eclipse.",
+            "Publico el código y el APK, con un catálogo de los eclipses de los próximos ocho años.",
+          ],
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
           arch: {
@@ -147,7 +178,13 @@ const locales = {
           scope: "proyecto personal",
           metric: "wake word propia",
           title: "Rufus — asistente de voz privado",
-          body: "Asistente que nunca envía tu audio a ningún sitio. La wake word «Rufus» está entrenada desde cero mezclando voces sintéticas en español con grabaciones reales, y se ejecuta entera en el dispositivo. El pipeline de entrenamiento es un notebook de Colab reproducible, publicado para que cualquiera entrene la suya.",
+          body: "Asistente que nunca envía tu audio a ningún sitio: la wake word «Rufus» se ejecuta entera en el dispositivo.",
+          role: "En solitario · datos, entrenamiento y publicación",
+          tasks: [
+            "Entreno la wake word desde cero mezclando voces sintéticas en español con grabaciones reales.",
+            "Exporto el modelo a ONNX para escuchar de forma continua sin red.",
+            "Publico el pipeline como notebook de Colab reproducible, para que cualquiera entrene la suya.",
+          ],
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
           arch: {
@@ -166,7 +203,14 @@ const locales = {
           scope: "Ayesa",
           metric: "sector público",
           title: "Gestión de expedientes de evaluación docente — EHU",
-          body: "Aplicación para la Universidad del País Vasco (UPV/EHU) que gestiona la evaluación de la actividad docente del profesorado. Cada expediente avanza por etapas, se asigna a uno o varios evaluadores, admite alegaciones y cierra con su informe; el seguimiento por estados muestra en qué punto está cada uno. Full-stack e interlocutor técnico con la universidad: frontend, lógica de estados, scripts de datos y puesta en producción.",
+          body: "Aplicación para la Universidad del País Vasco (UPV/EHU) que gestiona la evaluación de la actividad docente del profesorado, de la asignación de evaluadores al informe final.",
+          role: "Full-stack e interlocutor técnico con la universidad",
+          tasks: [
+            "Desarrollo el flujo de expedientes: etapas, varios evaluadores, consenso, alegaciones e informe final.",
+            "Implemento el cálculo de puntuaciones al vuelo en la valoración, para que los evaluadores dejen la hoja de cálculo.",
+            "Escribo scripts de datos en Oracle y llevo los pases a producción con Kubernetes y Helm.",
+            "Me reúno con las usuarias: recojo peticiones, estimo y priorizo con el jefe de proyecto.",
+          ],
           tags: ["Angular", "Java", "Spring Boot", "Oracle", "Kubernetes", "Helm", "SonarQube"],
           href: null,
           arch: {
@@ -185,7 +229,14 @@ const locales = {
           scope: "Ibermática · Ayesa",
           metric: "multi-perfil",
           title: "Panel de administración — Mutua Montañesa",
-          body: "Panel desde el que una mutua colaboradora con la Seguridad Social lleva su operativa completa. Empresas asociadas, asesorías que gestionan en su nombre y trabajadores entran cada uno a su propia área, con permisos y datos separados sobre una misma base de código. Responsable del frontend completo: arquitectura del monorepo, estado global, componentes compartidos y despliegue continuo, en un equipo de cuatro frontends.",
+          body: "Panel desde el que una mutua colaboradora con la Seguridad Social lleva su operativa completa, con empresas asociadas, asesorías y trabajadores cada uno en su propia área.",
+          role: "Responsable del frontend · equipo de cuatro frontends",
+          tasks: [
+            "Diseño la arquitectura del monorepo Angular con NX y el estado global con NGRX.",
+            "Separo áreas, permisos y datos por perfil sobre una sola base de código.",
+            "Creo los componentes compartidos que usa todo el equipo.",
+            "Mantengo el despliegue continuo con GitLab CI sobre AWS y Kubernetes.",
+          ],
           tags: ["Angular", "NGRX", "NX", "Spring Boot", "AWS", "Kubernetes", "GitLab CI"],
           href: null,
           arch: {
@@ -209,31 +260,57 @@ const locales = {
           years: "2022 — hoy",
           role: "Analista Programador Senior",
           company: "Ayesa",
-          stack: "Desde 2022 en Ibermática, hoy Ayesa. Frontend senior y full-stack en sistemas críticos para seguros, universidad y sanidad pública —Mutua Montañesa, UPV/EHU y Osakidetza—: arquitectura de frontends Angular con NX y NGRX, servicios Spring Boot, despliegue con Kubernetes y GitLab CI, calidad con SonarQube y trato directo con el cliente. En Osakidetza, además, la gestión de funcionalidades e incidencias automatizada con IA, del desarrollo a las pruebas.",
+          stack: "Desde 2022 en Ibermática, hoy Ayesa. Sistemas críticos para seguros, universidad y sanidad pública: Mutua Montañesa, UPV/EHU y Osakidetza.",
+          tasks: [
+            "Arquitectura de frontends Angular con NX y NGRX y servicios Spring Boot.",
+            "Despliegue con Kubernetes, Helm y GitLab CI; calidad con SonarQube.",
+            "Interlocución técnica con el cliente: reuniones, estimaciones y pases a producción.",
+            "En Osakidetza, gestión de funcionalidades e incidencias automatizada con IA, del desarrollo a las pruebas.",
+          ],
         },
         {
           years: "2026 — hoy",
           role: "Ingeniero de IA aplicada y automatización",
           company: "freelance y productos propios",
-          stack: "Integro IA en sistemas que ya existen para automatizar trabajo real, de la idea a producción: agentes con LLM conectados por MCP a las herramientas de cada sitio —CI/CD, monitorización, correo, hojas de cálculo, hasta equipos físicos por Modbus—, extracción de datos de facturas y documentos, flujos en n8n con pasos de IA y webs para comercios que se generan a partir de su web actual, con un asistente que aplica los cambios que pide el cliente. Elijo el modelo según el caso: Claude por API, o modelos abiertos en local o en GPU alquilada cuando los datos no deben salir de casa.",
+          stack: "Integro IA en sistemas que ya existen para automatizar trabajo real, de la idea a producción.",
+          tasks: [
+            "Agentes con LLM conectados por MCP a las herramientas de cada sitio: CI/CD, monitorización, correo, hojas de cálculo y equipos físicos por Modbus.",
+            "Extracción de datos de facturas y documentos, y flujos en n8n con pasos de IA.",
+            "Webs para comercios generadas a partir de su web actual, con un asistente que aplica los cambios que pide el cliente.",
+            "Elección del modelo según el caso: Claude por API, o modelos abiertos en local o en GPU alquilada cuando los datos no deben salir de casa.",
+          ],
         },
         {
           years: "2022 — 2024",
           role: "Socio fundador y desarrollador principal",
           company: "Asistencia y Gestión Deportiva",
-          stack: "Plataforma para un servicio de asesoramiento en apuestas deportivas. Diseñé la arquitectura desde cero y la llevé a producción: microservicios en la nube con Next.js y NestJS, alta y gestión de clientes, suscripciones y avisos en tiempo real con Redis y Socket.IO.",
+          stack: "Plataforma para un servicio de asesoramiento en apuestas deportivas.",
+          tasks: [
+            "Arquitectura desde cero y puesta en producción: microservicios en la nube con Next.js y NestJS.",
+            "Alta y gestión de clientes y suscripciones.",
+            "Avisos en tiempo real con Redis y Socket.IO.",
+          ],
         },
         {
           years: "2020 — 2021",
           role: "Desarrollador Full-Stack",
           company: "BOLTIA",
-          stack: "Referente técnico del equipo y mentor de un perfil junior. Angular 11, Node.js y despliegues Linux con PM2, de la revisión de código a la puesta en producción.",
+          stack: "Producto web con Angular 11 y Node.js.",
+          tasks: [
+            "Referente técnico del equipo y mentor de un perfil junior.",
+            "Revisión de código y puesta en producción.",
+            "Despliegues Linux con PM2.",
+          ],
         },
         {
           years: "2018 — 2021",
           role: "Desarrollador Full-Stack freelance",
           company: "Blockchain y criptomonedas",
-          stack: "Desarrollador principal de una criptomoneda propia, fork de Ethereum, y de todo su ecosistema web: wallet, back-office y web pública. Angular 7→12, Node.js, Docker Swarm y GitLab CI a lo largo de tres años.",
+          stack: "Tres años como desarrollador principal de una criptomoneda propia, fork de Ethereum.",
+          tasks: [
+            "Todo su ecosistema web: wallet, back-office y web pública.",
+            "Angular 7→12 y Node.js, con Docker Swarm y GitLab CI.",
+          ],
         },
       ],
       education: [
@@ -306,6 +383,7 @@ const locales = {
     projects: {
       heading: "Work",
       meta: "latest projects",
+      roleLabel: "my role",
       // Newest first
       items: [
         {
@@ -313,8 +391,16 @@ const locales = {
           scope: "Ayesa",
           metric: "public healthcare",
           title: "Integrated hospital system — Osakidetza",
-          body: "Hospital information system for the Basque Health Service, in daily use: admissions, patient management, surgical block, pharmacy and the rest of the care pathway in a single clinical application with years of history. I evolve the surgical block module — a patient's surgery request and its tracking through to the operating theatre — with new features, module-by-module refactoring and production incidents, without ever stopping the service. I have also automated the whole handling of features and bugs with AI: from the ticket to analysing the legacy behaviour, development and testing, with agents working on the project's own patterns and the team reviewing what they produce.",
-          tags: ["Angular", "TypeScript", "Java", "Spring", "AI agents"],
+          body: "Hospital information system for the Basque Health Service, in daily use: admissions, patient management, surgical block, pharmacy and the rest of the care pathway in a single clinical application with years of history.",
+          role: "Full-stack on the surgical block module · Ayesa team",
+          tasks: [
+            "Build new surgical block features in Angular and Spring: surgery records and scheduling per operating theatre.",
+            "Migrate screens from the previous system with data and HL7 message parity against the original.",
+            "Refactor a legacy module into shared and routing modules without stopping the service.",
+            "Automate the handling of features and bugs with AI: from the ticket to analysing the legacy behaviour, development and testing.",
+            "Fix production incidents in admissions and inpatient care.",
+          ],
+          tags: ["Angular", "TypeScript", "Java", "Spring", "HL7", "AI agents"],
           href: null,
           arch: {
             label: "Care pathway",
@@ -332,7 +418,14 @@ const locales = {
           scope: "personal project",
           metric: "AI extraction",
           title: "Invoice analyser — from PDF to data with AI",
-          body: "Self-hosted web app to stop typing invoices in by hand. Receipts arrive as a PDF, a photo from the phone or straight from email, which a Gmail reader checks on its own every twelve hours; a job queue runs them through an LLM that extracts merchant, date, amounts, line items and category, ready to browse, correct and analyse. Mobile-first, on my own server, with daily backups.",
+          body: "Self-hosted web app to stop typing invoices in by hand: receipts arrive as a PDF, a photo or by email and come out as data ready to browse, correct and analyse.",
+          role: "Solo · design, development and deployment",
+          tasks: [
+            "Designed the extraction pipeline: a job queue runs each document through an LLM and stores merchant, date, amounts, line items and category.",
+            "Integrated Gmail so invoices are picked up from email on their own every twelve hours.",
+            "Built the mobile-first web app in React and the API in Fastify, in a monorepo.",
+            "Deploy with Docker Compose on my own server, with object storage and daily backups.",
+          ],
           tags: ["React", "Fastify", "BullMQ", "PostgreSQL", "Redis", "MinIO", "Claude"],
           href: null,
           arch: {
@@ -351,7 +444,15 @@ const locales = {
           scope: "own product · IberStack",
           metric: "scales to zero",
           title: "PxNara — licensing and backend for a pixel-art suite",
-          body: "Pixel-art creation suite in C++ — 3D modelling, pixel render and editor — I build with Fran Llopis under the IberStack brand. I designed and run the product's whole control plane: accounts and free trial, licences and payments through Stripe, studios with seats and invitations, project sync with GitHub, the operator panel and secure login from the desktop app. Hexagonal architecture that scales to zero: no server runs while nobody is buying, and every push to main deploys itself.",
+          body: "Pixel-art creation suite in C++ — 3D modelling, pixel render and editor — I build with Fran Llopis under the IberStack brand, for Windows, macOS and Linux.",
+          role: "Co-founder · owner of the backend, the panel and distribution",
+          tasks: [
+            "Designed the API with a hexagonal architecture and the web panel; both scale to zero on Cloud Run: no server runs while nobody is buying.",
+            "Integrated Stripe: perpetual licence, individual and per-seat studio subscriptions, with VAT by country.",
+            "Implemented signed licences that work offline, a device limit and login from the desktop app with OAuth2 PKCE.",
+            "Connected project sync with GitHub, GitLab and Unity Version Control.",
+            "Automated CI/CD: every push to main deploys after verification, and releases ship for all three systems with an AI review.",
+          ],
           tags: ["TypeScript", "Fastify", "Next.js", "Firebase", "Firestore", "Stripe", "Cloud Run"],
           href: "https://pxnara.iberstack.com",
           arch: {
@@ -370,7 +471,14 @@ const locales = {
           scope: "personal project",
           metric: "no backend",
           title: "Eclipsum — solar eclipse companion",
-          body: "Android app for living through a solar eclipse, born for the total one that crossed Spain on August 12, 2026. It computes the C1–C4 contacts, obscuration and totality duration for any coordinate with no server: everything runs on the device. The map shows the path of totality and the nearest point to see it whole; eclipse mode tells you when to put your glasses on and take them off, and a catalogue covers the eclipses of the next eight years. Conceived, designed and built solo, from the ephemerides to the APK.",
+          body: "Android app for living through a solar eclipse, born for the total one that crossed Spain on August 12, 2026. Everything is computed on the device, with no server.",
+          role: "Solo · from the ephemerides to the APK",
+          tasks: [
+            "Compute the C1–C4 contacts, obscuration and totality duration for any coordinate.",
+            "Draw the path of totality on the map and the nearest point to see it whole.",
+            "Schedule local alerts for when to put the glasses on and take them off.",
+            "Published the code and the APK, with a catalogue of the eclipses of the next eight years.",
+          ],
           tags: ["React Native", "Expo", "TypeScript", "astronomy-engine", "Leaflet", "Firebase"],
           href: "https://github.com/jlopez994/eclipsum",
           arch: {
@@ -389,7 +497,13 @@ const locales = {
           scope: "personal project",
           metric: "custom wake word",
           title: "Rufus — private voice assistant",
-          body: "An assistant that never sends your audio anywhere. The “Rufus” wake word is trained from scratch by mixing Spanish synthetic voices with real recordings, and runs entirely on the device. The training pipeline is a reproducible Colab notebook, published so anyone can train their own.",
+          body: "An assistant that never sends your audio anywhere: the “Rufus” wake word runs entirely on the device.",
+          role: "Solo · data, training and release",
+          tasks: [
+            "Trained the wake word from scratch by mixing Spanish synthetic voices with real recordings.",
+            "Exported the model to ONNX for always-on listening with no network.",
+            "Published the pipeline as a reproducible Colab notebook so anyone can train their own.",
+          ],
           tags: ["Python", "openWakeWord", "ONNX", "Piper TTS", "audio"],
           href: "https://github.com/jlopez994/rufus-playbooks",
           arch: {
@@ -408,7 +522,14 @@ const locales = {
           scope: "Ayesa",
           metric: "public sector",
           title: "Faculty evaluation case management — EHU",
-          body: "Application for the University of the Basque Country (UPV/EHU) that manages the evaluation of faculty teaching. Each case file moves through stages, is assigned to one or more evaluators, accepts appeals and closes with its report; status tracking shows where every file stands. Full-stack and technical point of contact for the university: frontend, state logic, data scripts and the road to production.",
+          body: "Application for the University of the Basque Country (UPV/EHU) that manages the evaluation of faculty teaching, from assigning evaluators to the final report.",
+          role: "Full-stack and technical point of contact for the university",
+          tasks: [
+            "Build the case-file workflow: stages, multiple evaluators, consensus, appeals and final report.",
+            "Implemented on-the-fly scoring in the evaluation, so evaluators could drop their spreadsheet.",
+            "Write Oracle data scripts and run releases to production with Kubernetes and Helm.",
+            "Meet the users: gather requests, estimate and prioritise with the project manager.",
+          ],
           tags: ["Angular", "Java", "Spring Boot", "Oracle", "Kubernetes", "Helm", "SonarQube"],
           href: null,
           arch: {
@@ -427,7 +548,14 @@ const locales = {
           scope: "Ibermática · Ayesa",
           metric: "multi-role",
           title: "Admin panel — Mutua Montañesa",
-          body: "Panel from which a Spanish occupational insurance mutual runs its whole operation. Member companies, the advisory firms acting on their behalf and individual workers each enter their own area, with separate permissions and data on a single codebase. Owner of the whole frontend: monorepo architecture, global state, shared components and continuous deployment, in a team of four frontend developers.",
+          body: "Panel from which a Spanish occupational insurance mutual runs its whole operation, with member companies, advisory firms and workers each in their own area.",
+          role: "Frontend owner · team of four frontend developers",
+          tasks: [
+            "Designed the Angular monorepo architecture with NX and global state with NGRX.",
+            "Split areas, permissions and data per role on a single codebase.",
+            "Built the shared components the whole team uses.",
+            "Ran continuous deployment with GitLab CI on AWS and Kubernetes.",
+          ],
           tags: ["Angular", "NGRX", "NX", "Spring Boot", "AWS", "Kubernetes", "GitLab CI"],
           href: null,
           arch: {
@@ -451,31 +579,57 @@ const locales = {
           years: "2022 — now",
           role: "Senior Software Engineer",
           company: "Ayesa",
-          stack: "Since 2022 at Ibermática, now Ayesa. Senior frontend and full-stack on business-critical systems for insurance, university and public healthcare — Mutua Montañesa, UPV/EHU and Osakidetza: Angular frontend architecture with NX and NGRX, Spring Boot services, deployment with Kubernetes and GitLab CI, quality with SonarQube and direct contact with the client. At Osakidetza, also the handling of features and bugs automated with AI, from development to testing.",
+          stack: "Since 2022 at Ibermática, now Ayesa. Business-critical systems for insurance, university and public healthcare: Mutua Montañesa, UPV/EHU and Osakidetza.",
+          tasks: [
+            "Angular frontend architecture with NX and NGRX, and Spring Boot services.",
+            "Deployment with Kubernetes, Helm and GitLab CI; quality with SonarQube.",
+            "Technical point of contact with the client: meetings, estimates and releases to production.",
+            "At Osakidetza, AI-automated handling of features and bugs, from development to testing.",
+          ],
         },
         {
           years: "2026 — now",
           role: "Applied AI & Automation Engineer",
           company: "freelance and own products",
-          stack: "I integrate AI into systems that already exist to automate real work, from idea to production: LLM agents connected over MCP to each place's own tools — CI/CD, monitoring, email, spreadsheets, even physical equipment over Modbus —, data extraction from invoices and documents, n8n workflows with AI steps, and websites for small businesses generated from their current site, with an assistant that applies the changes the client asks for. I pick the model for the job: Claude over the API, or open models running locally or on rented GPUs when the data must not leave the building.",
+          stack: "I integrate AI into systems that already exist to automate real work, from idea to production.",
+          tasks: [
+            "LLM agents connected over MCP to each place's own tools: CI/CD, monitoring, email, spreadsheets and physical equipment over Modbus.",
+            "Data extraction from invoices and documents, and n8n workflows with AI steps.",
+            "Websites for small businesses generated from their current site, with an assistant that applies the changes the client asks for.",
+            "Picking the model for the job: Claude over the API, or open models running locally or on rented GPUs when the data must not leave the building.",
+          ],
         },
         {
           years: "2022 — 2024",
           role: "Co-founder & lead developer",
           company: "Asistencia y Gestión Deportiva",
-          stack: "Platform for a sports-betting advisory service. I designed the architecture from scratch and took it to production: cloud microservices with Next.js and NestJS, client onboarding and management, subscriptions and real-time alerts with Redis and Socket.IO.",
+          stack: "Platform for a sports-betting advisory service.",
+          tasks: [
+            "Architecture from scratch and launch to production: cloud microservices with Next.js and NestJS.",
+            "Client onboarding, management and subscriptions.",
+            "Real-time alerts with Redis and Socket.IO.",
+          ],
         },
         {
           years: "2020 — 2021",
           role: "Full-Stack Developer",
           company: "BOLTIA",
-          stack: "Technical reference for the team and mentor to a junior developer. Angular 11, Node.js and Linux deployments with PM2, from code review to production.",
+          stack: "Web product with Angular 11 and Node.js.",
+          tasks: [
+            "Technical reference for the team and mentor to a junior developer.",
+            "Code review and releases to production.",
+            "Linux deployments with PM2.",
+          ],
         },
         {
           years: "2018 — 2021",
           role: "Freelance Full-Stack Developer",
           company: "Blockchain & crypto",
-          stack: "Lead developer of a proprietary cryptocurrency forked from Ethereum and of its whole web ecosystem: wallet, back office and public site. Angular 7→12, Node.js, Docker Swarm and GitLab CI over three years.",
+          stack: "Three years as lead developer of a proprietary cryptocurrency forked from Ethereum.",
+          tasks: [
+            "Its whole web ecosystem: wallet, back office and public site.",
+            "Angular 7→12 and Node.js, with Docker Swarm and GitLab CI.",
+          ],
         },
       ],
       education: [
