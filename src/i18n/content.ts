@@ -23,10 +23,10 @@ export const LANG_NAMES: Record<Lang, string> = { es: "Español", en: "English" 
 const locales = {
   es: {
     meta: {
-      title: "Julián López Hervás — Full-Stack Senior",
+      title: "Julián López Hervás — Full-Stack Senior e IA aplicada",
       description:
-        "Ingeniero full-stack senior en Toledo y Madrid. Más de siete años diseñando, construyendo y desplegando aplicaciones web y móvil para fintech, seguros, sanidad y sector público con Angular, Spring Boot, React y Node; productos propios local-first, ML en el dispositivo y agentes de IA en el flujo diario.",
-      jobTitle: "Ingeniero de software full-stack senior",
+        "Ingeniero full-stack senior en Toledo y Madrid. Más de siete años diseñando, construyendo y desplegando aplicaciones web y móvil para fintech, seguros, sanidad y sector público con Angular, Spring Boot, React y Node. Integro IA en todo tipo de sistemas para automatizar procesos: agentes conectados por MCP, extracción de datos de documentos y flujos con LLM en producción.",
+      jobTitle: "Ingeniero de software full-stack senior e IA aplicada",
       ogAlt: "Julián López Hervás — Ingeniero full-stack senior",
     },
     nav: {
@@ -52,7 +52,7 @@ const locales = {
       badge: "abierto a nuevos proyectos",
       title: "Siete años de ingeniería full-stack. Ahora,",
       titleAccent: "a velocidad de IA",
-      lede: "Soy Julián López Hervás, ingeniero full-stack senior en Toledo y Madrid. Más de siete años llevando aplicaciones web y móvil a producción de principio a fin: arquitectura, frontend, backend, despliegue y trato directo con el cliente. Hoy, sistemas críticos de seguros, sanidad y sector público en Ayesa; antes, fintech, blockchain y una startup propia. Y productos propios que funcionan sin backend, con agentes de IA en cada paso del flujo.",
+      lede: "Soy Julián López Hervás, ingeniero full-stack senior en Toledo y Madrid. Más de siete años llevando aplicaciones web y móvil a producción de principio a fin: arquitectura, frontend, backend, despliegue y trato directo con el cliente. Hoy, sistemas críticos de seguros, sanidad y sector público en Ayesa; antes, fintech, blockchain y una startup propia. Y, cada vez más, integración de IA en sistemas que ya existen: agentes, extracción de documentos y automatizaciones que trabajan solas.",
       cta: "ver proyectos →",
       stats: [
         { v: "7+", k: "años llevando software a producción" },
@@ -71,8 +71,8 @@ const locales = {
           scope: "Ayesa",
           metric: "sanidad pública",
           title: "Sistema hospitalario integral — Osakidetza",
-          body: "Sistema de información hospitalario del Servicio Vasco de Salud, en uso diario: admisión, gestión de pacientes, bloque quirúrgico, farmacia y el resto del circuito asistencial en una sola aplicación clínica con años de historia. Evoluciono el módulo de bloque quirúrgico —la solicitud de intervención de un paciente y su seguimiento hasta el quirófano— con nuevas funcionalidades, refactor por módulos e incidencias de producción, sin parar nunca el servicio.",
-          tags: ["Angular", "TypeScript", "Java", "Spring"],
+          body: "Sistema de información hospitalario del Servicio Vasco de Salud, en uso diario: admisión, gestión de pacientes, bloque quirúrgico, farmacia y el resto del circuito asistencial en una sola aplicación clínica con años de historia. Evoluciono el módulo de bloque quirúrgico —la solicitud de intervención de un paciente y su seguimiento hasta el quirófano— con nuevas funcionalidades, refactor por módulos e incidencias de producción, sin parar nunca el servicio. Y he automatizado con IA toda la gestión de funcionalidades e incidencias: del ticket al análisis del funcional heredado, el desarrollo y las pruebas, con agentes que trabajan sobre los patrones del proyecto y el equipo revisando lo que generan.",
+          tags: ["Angular", "TypeScript", "Java", "Spring", "agentes de IA"],
           href: null,
           arch: {
             label: "Circuito asistencial",
@@ -82,6 +82,25 @@ const locales = {
               { t: "solicitud de intervención", k: "quirófano" },
               { t: "farmacia hospitalaria", k: "dispensación" },
               { t: "evolución en producción", k: "mantenimiento" },
+            ],
+          },
+        },
+        {
+          year: "2026 — hoy",
+          scope: "proyecto personal",
+          metric: "extracción con IA",
+          title: "Analizador de facturas — de PDF a datos con IA",
+          body: "Aplicación web autoalojada para dejar de picar facturas a mano. Los recibos llegan en PDF, en foto desde el móvil o directamente del correo, que un lector de Gmail revisa solo cada doce horas; una cola de trabajos los pasa por un LLM que extrae comercio, fecha, importes, líneas y categoría, y quedan listos para consultar, corregir y analizar. Mobile-first, en mi propio servidor y con copia diaria.",
+          tags: ["React", "Fastify", "BullMQ", "PostgreSQL", "Redis", "MinIO", "Claude"],
+          href: null,
+          arch: {
+            label: "Pipeline de extracción",
+            nodes: [
+              { t: "pdf, foto o correo", k: "entrada" },
+              { t: "cola de trabajos", k: "bullmq" },
+              { t: "lectura del documento", k: "llm" },
+              { t: "datos estructurados", k: "postgres" },
+              { t: "gastos por categoría", k: "análisis" },
             ],
           },
         },
@@ -190,7 +209,13 @@ const locales = {
           years: "2022 — hoy",
           role: "Analista Programador Senior",
           company: "Ayesa",
-          stack: "Desde 2022 en Ibermática, hoy Ayesa. Frontend senior y full-stack en sistemas críticos para seguros, universidad y sanidad pública —Mutua Montañesa, UPV/EHU y Osakidetza—: arquitectura de frontends Angular con NX y NGRX, servicios Spring Boot, despliegue con Kubernetes y GitLab CI, calidad con SonarQube y trato directo con el cliente.",
+          stack: "Desde 2022 en Ibermática, hoy Ayesa. Frontend senior y full-stack en sistemas críticos para seguros, universidad y sanidad pública —Mutua Montañesa, UPV/EHU y Osakidetza—: arquitectura de frontends Angular con NX y NGRX, servicios Spring Boot, despliegue con Kubernetes y GitLab CI, calidad con SonarQube y trato directo con el cliente. En Osakidetza, además, la gestión de funcionalidades e incidencias automatizada con IA, del desarrollo a las pruebas.",
+        },
+        {
+          years: "2026 — hoy",
+          role: "Ingeniero de IA aplicada y automatización",
+          company: "freelance y productos propios",
+          stack: "Integro IA en sistemas que ya existen para automatizar trabajo real, de la idea a producción: agentes con LLM conectados por MCP a las herramientas de cada sitio —CI/CD, monitorización, correo, hojas de cálculo, hasta equipos físicos por Modbus—, extracción de datos de facturas y documentos, flujos en n8n con pasos de IA y webs para comercios que se generan a partir de su web actual, con un asistente que aplica los cambios que pide el cliente. Elijo el modelo según el caso: Claude por API, o modelos abiertos en local o en GPU alquilada cuando los datos no deben salir de casa.",
         },
         {
           years: "2022 — 2024",
@@ -221,7 +246,7 @@ const locales = {
       heading: "Stack",
       meta: "día a día",
       groups: [
-        { label: "ia", items: ["Claude Code", "APIs de LLM", "RAG y embeddings", "MCP", "ONNX"] },
+        { label: "ia", items: ["Claude Code", "APIs de LLM", "agentes", "MCP", "RAG y embeddings", "n8n", "modelos abiertos", "ONNX"] },
         { label: "lenguajes", items: ["TypeScript", "JavaScript", "Java", "Python", "SQL"] },
         { label: "frontend", items: ["Angular", "NGRX", "React", "Next.js", "React Native", "Astro"] },
         { label: "backend", items: ["Spring Boot", "NestJS", "Fastify", "Node.js", "Kafka", "RabbitMQ", "Socket.IO"] },
@@ -240,10 +265,10 @@ const locales = {
 
   en: {
     meta: {
-      title: "Julián López Hervás — Senior Full-Stack Engineer",
+      title: "Julián López Hervás — Senior Full-Stack & Applied AI Engineer",
       description:
-        "Senior full-stack engineer in Toledo and Madrid, Spain. Seven-plus years designing, building and shipping web and mobile applications for fintech, insurance, healthcare and the public sector with Angular, Spring Boot, React and Node; local-first products, on-device ML and AI agents in the daily flow.",
-      jobTitle: "Senior full-stack software engineer",
+        "Senior full-stack engineer in Toledo and Madrid, Spain. Seven-plus years designing, building and shipping web and mobile applications for fintech, insurance, healthcare and the public sector with Angular, Spring Boot, React and Node. I integrate AI into all kinds of systems to automate processes: agents connected over MCP, data extraction from documents and LLM workflows in production.",
+      jobTitle: "Senior full-stack and applied AI software engineer",
       ogAlt: "Julián López Hervás — Senior full-stack engineer",
     },
     nav: {
@@ -269,7 +294,7 @@ const locales = {
       badge: "open to new projects",
       title: "Seven years of full-stack engineering. Now,",
       titleAccent: "at AI speed",
-      lede: "I'm Julián López Hervás, a senior full-stack engineer in Toledo and Madrid, Spain. Seven-plus years taking web and mobile applications to production end to end: architecture, frontend, backend, deployment and the conversation with the client. Today, business-critical systems for insurance, healthcare and the public sector at Ayesa; before that, fintech, blockchain and a startup of my own. Plus products of my own that run with no backend, with AI agents in every step of the flow.",
+      lede: "I'm Julián López Hervás, a senior full-stack engineer in Toledo and Madrid, Spain. Seven-plus years taking web and mobile applications to production end to end: architecture, frontend, backend, deployment and the conversation with the client. Today, business-critical systems for insurance, healthcare and the public sector at Ayesa; before that, fintech, blockchain and a startup of my own. And, more and more, AI integrated into systems that already exist: agents, document extraction and automations that run on their own.",
       cta: "see projects →",
       stats: [
         { v: "7+", k: "years taking software to production" },
@@ -288,8 +313,8 @@ const locales = {
           scope: "Ayesa",
           metric: "public healthcare",
           title: "Integrated hospital system — Osakidetza",
-          body: "Hospital information system for the Basque Health Service, in daily use: admissions, patient management, surgical block, pharmacy and the rest of the care pathway in a single clinical application with years of history. I evolve the surgical block module — a patient's surgery request and its tracking through to the operating theatre — with new features, module-by-module refactoring and production incidents, without ever stopping the service.",
-          tags: ["Angular", "TypeScript", "Java", "Spring"],
+          body: "Hospital information system for the Basque Health Service, in daily use: admissions, patient management, surgical block, pharmacy and the rest of the care pathway in a single clinical application with years of history. I evolve the surgical block module — a patient's surgery request and its tracking through to the operating theatre — with new features, module-by-module refactoring and production incidents, without ever stopping the service. I have also automated the whole handling of features and bugs with AI: from the ticket to analysing the legacy behaviour, development and testing, with agents working on the project's own patterns and the team reviewing what they produce.",
+          tags: ["Angular", "TypeScript", "Java", "Spring", "AI agents"],
           href: null,
           arch: {
             label: "Care pathway",
@@ -299,6 +324,25 @@ const locales = {
               { t: "surgery request", k: "theatre" },
               { t: "hospital pharmacy", k: "dispensing" },
               { t: "evolving in production", k: "maintenance" },
+            ],
+          },
+        },
+        {
+          year: "2026 — now",
+          scope: "personal project",
+          metric: "AI extraction",
+          title: "Invoice analyser — from PDF to data with AI",
+          body: "Self-hosted web app to stop typing invoices in by hand. Receipts arrive as a PDF, a photo from the phone or straight from email, which a Gmail reader checks on its own every twelve hours; a job queue runs them through an LLM that extracts merchant, date, amounts, line items and category, ready to browse, correct and analyse. Mobile-first, on my own server, with daily backups.",
+          tags: ["React", "Fastify", "BullMQ", "PostgreSQL", "Redis", "MinIO", "Claude"],
+          href: null,
+          arch: {
+            label: "Extraction pipeline",
+            nodes: [
+              { t: "pdf, photo or email", k: "input" },
+              { t: "job queue", k: "bullmq" },
+              { t: "document reading", k: "llm" },
+              { t: "structured data", k: "postgres" },
+              { t: "spend by category", k: "analysis" },
             ],
           },
         },
@@ -407,7 +451,13 @@ const locales = {
           years: "2022 — now",
           role: "Senior Software Engineer",
           company: "Ayesa",
-          stack: "Since 2022 at Ibermática, now Ayesa. Senior frontend and full-stack on business-critical systems for insurance, university and public healthcare — Mutua Montañesa, UPV/EHU and Osakidetza: Angular frontend architecture with NX and NGRX, Spring Boot services, deployment with Kubernetes and GitLab CI, quality with SonarQube and direct contact with the client.",
+          stack: "Since 2022 at Ibermática, now Ayesa. Senior frontend and full-stack on business-critical systems for insurance, university and public healthcare — Mutua Montañesa, UPV/EHU and Osakidetza: Angular frontend architecture with NX and NGRX, Spring Boot services, deployment with Kubernetes and GitLab CI, quality with SonarQube and direct contact with the client. At Osakidetza, also the handling of features and bugs automated with AI, from development to testing.",
+        },
+        {
+          years: "2026 — now",
+          role: "Applied AI & Automation Engineer",
+          company: "freelance and own products",
+          stack: "I integrate AI into systems that already exist to automate real work, from idea to production: LLM agents connected over MCP to each place's own tools — CI/CD, monitoring, email, spreadsheets, even physical equipment over Modbus —, data extraction from invoices and documents, n8n workflows with AI steps, and websites for small businesses generated from their current site, with an assistant that applies the changes the client asks for. I pick the model for the job: Claude over the API, or open models running locally or on rented GPUs when the data must not leave the building.",
         },
         {
           years: "2022 — 2024",
@@ -438,7 +488,7 @@ const locales = {
       heading: "Stack",
       meta: "day to day",
       groups: [
-        { label: "ai", items: ["Claude Code", "LLM APIs", "RAG & embeddings", "MCP", "ONNX"] },
+        { label: "ai", items: ["Claude Code", "LLM APIs", "agents", "MCP", "RAG & embeddings", "n8n", "open models", "ONNX"] },
         { label: "languages", items: ["TypeScript", "JavaScript", "Java", "Python", "SQL"] },
         { label: "frontend", items: ["Angular", "NGRX", "React", "Next.js", "React Native", "Astro"] },
         { label: "backend", items: ["Spring Boot", "NestJS", "Fastify", "Node.js", "Kafka", "RabbitMQ", "Socket.IO"] },
