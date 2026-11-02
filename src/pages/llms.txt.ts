@@ -26,12 +26,14 @@ export const GET: APIRoute = ({ site }) => {
     ...t.projects.items.map(
       (p) =>
         `- ${p.href ? `[${p.title}](${p.href})` : p.title} — ${p.year}, ${p.scope}. ` +
-        `${p.body} Stack: ${p.tags.join(", ")}.`,
+        `${p.body} Role: ${p.role}. ${p.tasks.join(" ")} Stack: ${p.tags.join(", ")}.`,
     ),
     ``,
     `## Experience`,
     ``,
-    ...t.experience.roles.map((r) => `- ${r.years} — ${r.role}, ${r.company}. ${r.stack}`),
+    ...t.experience.roles.map(
+      (r) => `- ${r.years} — ${r.role}, ${r.company}. ${r.stack} ${r.tasks.join(" ")}`,
+    ),
     ``,
     `## Education`,
     ``,

@@ -63,6 +63,16 @@ const { t } = Astro.props;
                 {p.href ? <a href={p.href}>{p.title}</a> : p.title}
               </h3>
               <p>{p.body}</p>
+              <div class="work">
+                <p class="role">
+                  <span class="role-label">{t.roleLabel}</span> {p.role}
+                </p>
+                <ul class="tasks">
+                  {p.tasks.map((task) => (
+                    <li>{task}</li>
+                  ))}
+                </ul>
+              </div>
               <div class="tags">
                 {p.tags.map((tag) => (
                   <span class="chip">{tag}</span>
@@ -313,6 +323,47 @@ const { t } = Astro.props;
     font-size: 1rem;
     line-height: 1.68;
     color: var(--color-mid);
+  }
+
+  .work {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 34rem;
+  }
+
+  .step .role {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-sm);
+    line-height: 1.5;
+    color: var(--color-text-soft);
+  }
+
+  .role-label {
+    color: var(--color-accent);
+  }
+
+  .tasks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-mid);
+  }
+
+  /* Accent dash instead of a bullet: reads as a log of work done */
+  .tasks li {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .tasks li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
   }
 
   .tags {
