@@ -269,11 +269,12 @@ const locales = {
           ],
         },
         {
-          years: "2026 — hoy",
+          years: "2021 — hoy",
           role: "Ingeniero de IA aplicada y automatización",
           company: "freelance y productos propios",
-          stack: "Integro IA en sistemas que ya existen para automatizar trabajo real, de la idea a producción.",
+          stack: "Programo con IA desde las primeras versiones del autocompletado, y hoy integro IA en sistemas que ya existen para automatizar trabajo real, de la idea a producción.",
           tasks: [
+            "Conozco cómo funcionan por dentro: redes neuronales, transformers, embeddings y entrenamiento de modelos propios.",
             "Agentes con LLM conectados por MCP a las herramientas de cada sitio: CI/CD, monitorización, correo, hojas de cálculo y equipos físicos por Modbus.",
             "Extracción de datos de facturas y documentos, y flujos en n8n con pasos de IA.",
             "Webs para comercios generadas a partir de su web actual, con un asistente que aplica los cambios que pide el cliente.",
@@ -323,7 +324,7 @@ const locales = {
       heading: "Stack",
       meta: "día a día",
       groups: [
-        { label: "ia", items: ["Claude Code", "APIs de LLM", "agentes", "MCP", "RAG y embeddings", "n8n", "modelos abiertos", "ONNX"] },
+        { label: "ia", items: ["Claude Code", "APIs de LLM", "agentes", "MCP", "RAG y embeddings", "transformers", "n8n", "modelos abiertos", "ONNX"] },
         { label: "lenguajes", items: ["TypeScript", "JavaScript", "Java", "Python", "SQL"] },
         { label: "frontend", items: ["Angular", "NGRX", "React", "Next.js", "React Native", "Astro"] },
         { label: "backend", items: ["Spring Boot", "NestJS", "Fastify", "Node.js", "Kafka", "RabbitMQ", "Socket.IO"] },
@@ -588,11 +589,12 @@ const locales = {
           ],
         },
         {
-          years: "2026 — now",
+          years: "2021 — now",
           role: "Applied AI & Automation Engineer",
           company: "freelance and own products",
-          stack: "I integrate AI into systems that already exist to automate real work, from idea to production.",
+          stack: "I have been coding with AI since the first autocomplete releases, and today I integrate AI into systems that already exist to automate real work, from idea to production.",
           tasks: [
+            "I understand how they work inside: neural networks, transformers, embeddings and training models of my own.",
             "LLM agents connected over MCP to each place's own tools: CI/CD, monitoring, email, spreadsheets and physical equipment over Modbus.",
             "Data extraction from invoices and documents, and n8n workflows with AI steps.",
             "Websites for small businesses generated from their current site, with an assistant that applies the changes the client asks for.",
@@ -642,7 +644,7 @@ const locales = {
       heading: "Stack",
       meta: "day to day",
       groups: [
-        { label: "ai", items: ["Claude Code", "LLM APIs", "agents", "MCP", "RAG & embeddings", "n8n", "open models", "ONNX"] },
+        { label: "ai", items: ["Claude Code", "LLM APIs", "agents", "MCP", "RAG & embeddings", "transformers", "n8n", "open models", "ONNX"] },
         { label: "languages", items: ["TypeScript", "JavaScript", "Java", "Python", "SQL"] },
         { label: "frontend", items: ["Angular", "NGRX", "React", "Next.js", "React Native", "Astro"] },
         { label: "backend", items: ["Spring Boot", "NestJS", "Fastify", "Node.js", "Kafka", "RabbitMQ", "Socket.IO"] },
