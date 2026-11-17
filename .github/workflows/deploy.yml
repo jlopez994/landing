@@ -3,6 +3,8 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches: [main]
+    # Solo docs: el sitio no cambia (la misma lista que soloDocs de jenkins-lib).
+    paths-ignore: ['README*', 'CHANGELOG*', 'LICENSE*', 'AGENTS.md', 'CLAUDE.md', 'docs/**', '.centinela/**']
   workflow_dispatch:
 
 jobs:
